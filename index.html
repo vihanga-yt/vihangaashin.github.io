@@ -1,187 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <title>Document</title>
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-     <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tsmrtid Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        .code-block {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: monospace;
+            margin: 20px 0;
+        }
+        .copy-button {
+            float: right;
+            background-color: #eee;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        pre {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
 
-     <!-- header section -->
-     <header class="header">
-          <a href="#" class="logo">VihangaYT<span class="animate" style="--i:1;"></span></a>
-          <div class="fa-solid fa-bars" id="menu-icon"><span class="animate" style="--i:2;"></span></div>
-          <nav class="navbar">
-               <a href="#home" class="active">Home</a>
-               <a href="#about">About</a>
-               <a href="#education">Education</a>
-               <a href="#skills">Skills</a>
+    <div class="container">
+        <h2>Installation</h2>
+        <div class="code-block">
+            <p># from NPM</p>
+            <pre>npm i aptoide-scraper</pre>
+            <br>
+            <p># from JSR</p>
+            <pre>bunx jsr add aptoide-scraper</pre>
+        </div>
 
-               <span class="active-nav"></span>
-               <span class="animate" style="--i:2;"></span>
-          </nav>
-     </header>
+        <h2>Usage</h2>
+        <h3>Get MRZ</h3>
+        <div class="code-block">
+            <button class="copy-button" onclick="copyCode('mrzCode')">Copy</button>
+            <pre id="mrzCode">
+const { 
+search
+} = require('aptoide-scraper')
 
-     <!-- home section design -->
-     <section class="home show-animate" id="home">
-          <div class="home-content">
-               <h1>Hi, I'm <span>Vihanga Ashinshana</span><span class="animate" style="--i:2;"></span></h1>
-               <div class="text-animate">
-                    <h3>Backend Developer</h3>
-                    <span class="animate" style="--i:3;"></span>
-               </div>
-               <p>I am a student from Sri Lanka. I'm 15 years old. I love programming. My hobby is creating whatsapp bots and creating websites. This is the official page I made for my projects. My favourite coding languages are Nodejs,Html and Go.<span class="animate" style="--i:4;"></span></p>
-               <div class="btn-box">
-                    <a href="https://api.vihangayt.com/" class="btn">Api Site</a>
-                    <a href="https://whatsapp.com/channel/0029Va9fA47HQbRvFFnNpN3o" class="btn">Community</a>
-                    <span class="animate" style="--i:5;"></span>
-               </div>
-          </div>
-          <div class="home-sci">
-              <a href="https://www.facebook.com/profile.php?id=100092318475738&mibextid=ZbWKwL"><i class="fa-brands fa-facebook-f"></i></a>
-              <a href="https://www.instagram.com/itzz.me_vihanga?igsh=MTljYWpqa2dndHdwcw=="><i class="fa-brands fa-instagram"></i></a>
-              <a href="https://t.me/vihanga_ashinshana"><i class="fa-brands fa-telegram"></i></a>
-              <span class="animate" style="--i:6;"></span>
-          </div>
-          <div class="home-imgHover"></div>
-          <span class="animate home-img" style="--i:7;"></span>
-     </section>
+let search = await search('whatsapp')
+console.log(search)
+            </pre>
+        </div>
 
-     <!-- about section design -->
-     <section class="about" id="about">
-          <h2 class="heading">About <span>Me</span><span class="animate scroll" style="--i:1;"></span></h2>
-          <div class="about-img">
-               <img src="img/about.jpeg">
-               <span class="circle-spin"></span>
-               <span class="animate scroll" style="--i:2;"></span>
-          </div>
-          <div class="about-content">
-               <h3>Backend Developer <span class="animate scroll" style="--i:3;"></span></h3>
-               <p>I am a student from Sri Lanka. I'm 15 years old. I love programming. My hobby is creating whatsapp bots and creating websites. This is the official page I made for my projects. My favourite coding languages are Nodejs,Html and Go.<span class="animate scroll" style="--i:4;"></span></p>
-               <div class="btn-box btns">
-                    <a href="https://github.com/anonymous-lll" class="btn">Github</a>
-                    <span class="animate scroll" style="--i:5;"></span>
-               </div>
+        <h3>Extract and Save Photo</h3>
+        <div class="code-block">
+            <button class="copy-button" onclick="copyCode('photoCode')">Copy</button>
+            <pre id="photoCode">
+const { 
+download
+} = require('aptoide-scraper')
 
-          </div>
-     </section>
+let data = await download('com.whatsapp')
+console.log(data)
+            </pre>
+        </div>
+    </div>
 
-     <!-- education section design -->
-     <section class="education" id="education">
-          <h2 class="heading">My <span>Journey</span><span class="animate scroll" style="--i:1;"></span></h2>
-          <div class="education-row">
-               <div class="education-column">
-                    <h3 class="title">Projects<span class="animate scroll" style="--i:2;"></span></h3>
-                    <div class="education-box">
-                         <div class="education-content">
-                              <div class="content">
-                                   <div class="year"><i class="fa-solid fa-calendar-days"></i> 2021 - 2024</div>
-                                   <h3>Whatsapp Bot</h3>
-                                   <p>A whatsapp bot using bailyes library. Easy to use and simple.</p>
-                              </div>
-                         </div>
-                         <div class="education-content">
-                              <div class="content">
-                                   <div class="year"><i class="fa-solid fa-calendar-days"></i> 2022 - 2024</div>
-                                   <h3>VihangaYT Api Site</h3>
-                                   <p>Rest Api site for developers. 100+ Apis with ai, downloading and tools features.</p>
-                              </div>
-                         </div>
-                         <span class="animate scroll" style="--i:3;"></span>
-                    </div>
-               </div>
-               <div class="education-column">
-                    <h3 class="title">Experience<span class="animate scroll" style="--i:4;"></span></h3>
-                    <div class="education-box">
-                         <div class="education-content">
-                              <div class="content">
-                                   <div class="year"><i class="fa-solid fa-calendar-days"></i> 2023</div>
-                                   <h3>Javascript 30 days challange</h3>
-                                   <p>Compleated 30 days javascript challange.</p>
-                              </div>
-                         </div>
-                         <div class="education-content">
-                              <div class="content">
-                                   <div class="year"><i class="fa-solid fa-calendar-days"></i> 2021-2024</div>
-                                   <h3>Learned Go, Js, Html, Css</h3>
-                                   <p>Learned Nodejs, Go, Html and css simply using youtube, chatgpt and google.</p>
-                              </div>
-                         </div>
-                         <span class="animate scroll" style="--i:5;"></span>
-                    </div>
-               </div>
-          </div>
-     </section>
-
-     <!-- skills section design -->
-     <section class="skills" id="skills">
-          <h2 class="heading">My <span>Skills</span><span class="animate scroll" style="--i:1;"></span></h2>
-          <div class="skills-row">
-               <div class="skills-column">
-                    <h3 class="title">Coding Skills<span class="animate scroll" style="--i:2;"></span></h3>
-                    <div class="skills-box">
-                         <div class="skills-content">
-                              <div class="progress">
-                                   <h3>NodeJs <span>90%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                              <div class="progress">
-                                   <h3>Html <span>70%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                              <div class="progress">
-                                   <h3>Go <span>50%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                              <div class="progress">
-                                   <h3>Css <span>30%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                         </div>
-                         <span class="animate scroll" style="--i:3;"></span>
-                    </div>
-               </div>
-               <div class="skills-column">
-                    <h3 class="title">Professional Skills<span class="animate scroll" style="--i:4;"></span></h3>
-                    <div class="skills-box">
-                         <div class="skills-content">
-                              <div class="progress">
-                                   <h3>Whatsapp Bots Development <span>95%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                              <div class="progress">
-                                   <h3>Web Scraping <span>70%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                              <div class="progress">
-                                   <h3>Web Design <span>65%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                              <div class="progress">
-                                   <h3>Graphic Design <span>40%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                         </div>
-                         <span class="animate scroll" style="--i:5;"></span>
-                    </div>
-               </div>
-          </div>
-     </section>
-
-
-     <!-- footer design -->
-     <footer class="footer">
-          <div class="footer-text">
-               <p>Copyright &copy; 2024 by VihangaYT | All Rights Reserved</p>
-               <span class="animate scroll" style="--i:1;"></span>
-          </div>
-          <div class="footer-iconTop">
-               <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
-               <span class="animate scroll" style="--i:2;"></span>
-          </div>
-     </footer>
-
-     <script src="script.js"></script>
+    <script>
+        function copyCode(codeId) {
+            var code = document.getElementById(codeId).innerText;
+            navigator.clipboard.writeText(code).then(function() {
+                alert('Code copied to clipboard');
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
 
 </body>
 </html>
