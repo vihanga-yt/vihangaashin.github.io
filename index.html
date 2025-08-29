@@ -3,85 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vihanga Ashinshana - Portfolio</title>
+    <title>Vihanga Ashinshana - Full Stack Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <span class="logo-text">VihangaYT</span>
-                <div class="logo-dot"></div>
+                <div class="logo-pulse"></div>
             </div>
             <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#home" class="nav-link active" data-text="Home">Home</a>
+                <a href="#about" class="nav-link" data-text="About">About</a>
+                <a href="#skills" class="nav-link" data-text="Skills">Skills</a>
+                <a href="#projects" class="nav-link" data-text="Projects">Projects</a>
+                <a href="#contact" class="nav-link" data-text="Contact">Contact</a>
             </div>
             <div class="nav-toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-background">
-            <div class="floating-shapes">
-                <div class="shape shape-1"></div>
-                <div class="shape shape-2"></div>
-                <div class="shape shape-3"></div>
-                <div class="shape shape-4"></div>
-                <div class="shape shape-5"></div>
+        <div class="hero-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+            <div class="particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
             </div>
         </div>
         <div class="hero-content">
             <div class="hero-text">
                 <div class="greeting">
-                    <span class="wave">👋</span>
-                    <span>Hello, I'm</span>
+                    <span class="wave-emoji">👋</span>
+                    <span class="greeting-text">Hello, I'm</span>
                 </div>
                 <h1 class="hero-name">
-                    <span class="name-part">Vihanga</span>
-                    <span class="name-part">Ashinshana</span>
+                    <span class="name-line">Vihanga</span>
+                    <span class="name-line">Ashinshana</span>
                 </h1>
-                <div class="hero-title">
-                    <span class="title-text">Full Stack Developer</span>
-                    <div class="title-cursor"></div>
+                <div class="hero-subtitle">
+                    <span class="typing-text">Full Stack Developer</span>
+                    <span class="cursor-blink">|</span>
                 </div>
                 <p class="hero-description">
-                    16-year-old passionate developer from Sri Lanka, crafting digital experiences 
-                    with JavaScript, Node.js, and modern web technologies.
+                    16-year-old passionate developer from Sri Lanka, crafting innovative 
+                    digital experiences with JavaScript, Node.js, and modern web technologies.
                 </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">
-                        <span>View My Work</span>
-                        <i class="fas fa-arrow-right"></i>
+                <div class="hero-cta">
+                    <a href="#projects" class="cta-btn primary">
+                        <span class="btn-text">View My Work</span>
+                        <div class="btn-icon">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="btn-bg"></div>
                     </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <span>Get In Touch</span>
+                    <a href="#contact" class="cta-btn secondary">
+                        <span class="btn-text">Let's Connect</span>
+                        <div class="btn-bg"></div>
+                    </a>
+                </div>
+                <div class="social-preview">
+                    <a href="https://www.instagram.com/itzz.me_vihanga?igsh=MTljYWpqa2dndHdwcw==" class="social-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100092318475738&mibextid=ZbWKwL" class="social-icon facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://t.me/vihanga_ashinshana" class="social-icon telegram">
+                        <i class="fab fa-telegram"></i>
                     </a>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="image-container">
-                    <div class="image-blur"></div>
-                    <div class="image-glow"></div>
+            <div class="hero-visual">
+                <div class="code-window">
+                    <div class="window-header">
+                        <div class="window-controls">
+                            <span class="control close"></span>
+                            <span class="control minimize"></span>
+                            <span class="control maximize"></span>
+                        </div>
+                        <div class="window-title">portfolio.js</div>
+                    </div>
+                    <div class="code-content">
+                        <div class="code-line">
+                            <span class="line-number">1</span>
+                            <span class="code-text">
+                                <span class="keyword">const</span> 
+                                <span class="variable">developer</span> = {
+                            </span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">2</span>
+                            <span class="code-text">
+                                &nbsp;&nbsp;<span class="property">name</span>: 
+                                <span class="string">'Vihanga Ashinshana'</span>,
+                            </span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">3</span>
+                            <span class="code-text">
+                                &nbsp;&nbsp;<span class="property">age</span>: 
+                                <span class="number">16</span>,
+                            </span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">4</span>
+                            <span class="code-text">
+                                &nbsp;&nbsp;<span class="property">location</span>: 
+                                <span class="string">'Sri Lanka'</span>,
+                            </span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">5</span>
+                            <span class="code-text">
+                                &nbsp;&nbsp;<span class="property">skills</span>: [
+                                <span class="string">'JavaScript'</span>, 
+                                <span class="string">'Node.js'</span>]
+                            </span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">6</span>
+                            <span class="code-text">};</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="scroll-indicator">
-            <div class="scroll-text">Scroll Down</div>
-            <div class="scroll-arrow">
-                <i class="fas fa-chevron-down"></i>
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
             </div>
+            <span class="scroll-text">Scroll to explore</span>
         </div>
     </section>
 
@@ -91,51 +164,76 @@
             <div class="section-header">
                 <span class="section-tag">Get to know me</span>
                 <h2 class="section-title">About Me</h2>
+                <div class="title-underline"></div>
             </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <div class="about-card">
-                        <div class="card-content">
-                            <h3>Who I Am</h3>
-                            <p>
-                                I'm a 16-year-old developer from Sri Lanka with a passion for creating 
-                                innovative digital solutions. Currently pursuing my studies while 
-                                building my expertise in web development and backend technologies.
-                            </p>
-                            <div class="stats-grid">
-                                <div class="stat-item">
-                                    <span class="stat-number">16</span>
-                                    <span class="stat-label">Years Old</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">3+</span>
-                                    <span class="stat-label">Years Coding</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">50+</span>
-                                    <span class="stat-label">Projects</span>
-                                </div>
+            <div class="about-grid">
+                <div class="about-content">
+                    <div class="about-card glass-card">
+                        <div class="card-glow"></div>
+                        <h3>Who I Am</h3>
+                        <p>
+                            I'm a 16-year-old full stack developer from Sri Lanka with an insatiable 
+                            passion for technology and innovation. Currently balancing my studies 
+                            while diving deep into the world of web development, creating solutions 
+                            that make a difference.
+                        </p>
+                        <p>
+                            My journey in programming started 3 years ago, and since then I've been 
+                            constantly learning and building projects that challenge my skills and 
+                            expand my knowledge in modern web technologies.
+                        </p>
+                        <div class="achievement-badges">
+                            <div class="badge">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Student</span>
+                            </div>
+                            <div class="badge">
+                                <i class="fas fa-code"></i>
+                                <span>Developer</span>
+                            </div>
+                            <div class="badge">
+                                <i class="fas fa-globe-asia"></i>
+                                <span>Sri Lanka</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="about-image">
-                    <div class="image-wrapper">
-                        <div class="profile-image">
-                            <div class="image-overlay"></div>
+                <div class="about-stats">
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-birthday-cake"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number" data-target="16">0</span>
+                                <span class="stat-label">Years Old</span>
+                            </div>
                         </div>
-                        <div class="floating-elements">
-                            <div class="element element-1">
-                                <i class="fab fa-js-square"></i>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-code"></i>
                             </div>
-                            <div class="element element-2">
-                                <i class="fab fa-node-js"></i>
+                            <div class="stat-info">
+                                <span class="stat-number" data-target="3">0</span>
+                                <span class="stat-label">Years Coding</span>
                             </div>
-                            <div class="element element-3">
-                                <i class="fab fa-html5"></i>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-project-diagram"></i>
                             </div>
-                            <div class="element element-4">
-                                <i class="fab fa-css3-alt"></i>
+                            <div class="stat-info">
+                                <span class="stat-number" data-target="50">0</span>
+                                <span class="stat-label">Projects Built</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-coffee"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number" data-target="1000">0</span>
+                                <span class="stat-label">Cups of Coffee</span>
                             </div>
                         </div>
                     </div>
@@ -150,66 +248,59 @@
             <div class="section-header">
                 <span class="section-tag">What I do</span>
                 <h2 class="section-title">My Skills</h2>
+                <div class="title-underline"></div>
             </div>
             <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">
+                <div class="skill-card glass-card">
+                    <div class="skill-icon javascript">
                         <i class="fab fa-js-square"></i>
                     </div>
                     <h3>JavaScript</h3>
-                    <p>Modern ES6+ JavaScript for dynamic and interactive web applications</p>
-                    <div class="skill-level">
-                        <div class="skill-bar" data-level="90"></div>
+                    <p>Modern ES6+ JavaScript for dynamic and interactive web applications with advanced features</p>
+                    <div class="skill-progress">
+                        <div class="progress-bar" data-progress="90">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <span class="progress-text">90%</span>
                     </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
+                <div class="skill-card glass-card">
+                    <div class="skill-icon nodejs">
                         <i class="fab fa-node-js"></i>
                     </div>
                     <h3>Node.js</h3>
-                    <p>Server-side development with Express.js and RESTful API creation</p>
-                    <div class="skill-level">
-                        <div class="skill-bar" data-level="85"></div>
+                    <p>Server-side development with Express.js, API creation, and backend architecture</p>
+                    <div class="skill-progress">
+                        <div class="progress-bar" data-progress="85">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <span class="progress-text">85%</span>
                     </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
+                <div class="skill-card glass-card">
+                    <div class="skill-icon html">
                         <i class="fab fa-html5"></i>
                     </div>
                     <h3>HTML5</h3>
-                    <p>Semantic markup and modern HTML5 features for web structure</p>
-                    <div class="skill-level">
-                        <div class="skill-bar" data-level="95"></div>
+                    <p>Semantic markup, accessibility, and modern HTML5 features for robust web structure</p>
+                    <div class="skill-progress">
+                        <div class="progress-bar" data-progress="95">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <span class="progress-text">95%</span>
                     </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
+                <div class="skill-card glass-card">
+                    <div class="skill-icon css">
                         <i class="fab fa-css3-alt"></i>
                     </div>
                     <h3>CSS3</h3>
-                    <p>Advanced styling with animations, flexbox, and responsive design</p>
-                    <div class="skill-level">
-                        <div class="skill-bar" data-level="80"></div>
-                    </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>WhatsApp Bots</h3>
-                    <p>Creating intelligent chatbots using Baileys library</p>
-                    <div class="skill-level">
-                        <div class="skill-bar" data-level="95"></div>
-                    </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3>API Development</h3>
-                    <p>Building robust REST APIs and backend services</p>
-                    <div class="skill-level">
-                        <div class="skill-bar" data-level="88"></div>
+                    <p>Advanced styling, animations, flexbox, grid, and responsive design principles</p>
+                    <div class="skill-progress">
+                        <div class="progress-bar" data-progress="88">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <span class="progress-text">88%</span>
                     </div>
                 </div>
             </div>
@@ -222,65 +313,93 @@
             <div class="section-header">
                 <span class="section-tag">My work</span>
                 <h2 class="section-title">Featured Projects</h2>
+                <div class="title-underline"></div>
             </div>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card glass-card">
                     <div class="project-image">
+                        <div class="project-bg api-bg"></div>
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="https://api.vihangayt.com/" class="project-link">
+                                <a href="https://api.vihangayt.com/" class="project-btn">
                                     <i class="fas fa-external-link-alt"></i>
+                                    <span>Live Demo</span>
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3>VihangaYT API</h3>
-                        <p>Comprehensive REST API platform with 100+ endpoints featuring AI, downloading tools, and developer utilities.</p>
-                        <div class="project-tags">
-                            <span class="tag">Node.js</span>
-                            <span class="tag">Express</span>
-                            <span class="tag">API</span>
+                        <div class="project-header">
+                            <h3>VihangaYT API</h3>
+                            <div class="project-status">
+                                <span class="status-dot active"></span>
+                                <span>Live</span>
+                            </div>
+                        </div>
+                        <p>Comprehensive REST API platform with 100+ endpoints featuring AI tools, downloaders, and developer utilities used by thousands of developers worldwide.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Express</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">MongoDB</span>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card glass-card">
                     <div class="project-image">
+                        <div class="project-bg bot-bg"></div>
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="#" class="project-link">
-                                    <i class="fas fa-external-link-alt"></i>
+                                <a href="#" class="project-btn">
+                                    <i class="fab fa-github"></i>
+                                    <span>View Code</span>
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3>WhatsApp Bot Framework</h3>
-                        <p>Advanced WhatsApp bot using Baileys library with multiple features and easy deployment.</p>
-                        <div class="project-tags">
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Baileys</span>
-                            <span class="tag">Bot</span>
+                        <div class="project-header">
+                            <h3>WhatsApp Bot Framework</h3>
+                            <div class="project-status">
+                                <span class="status-dot"></span>
+                                <span>In Development</span>
+                            </div>
+                        </div>
+                        <p>Advanced WhatsApp automation bot using Baileys library with AI integration, media processing, and multi-device support.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Baileys</span>
+                            <span class="tech-tag">AI</span>
+                            <span class="tech-tag">Automation</span>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card glass-card">
                     <div class="project-image">
+                        <div class="project-bg web-bg"></div>
                         <div class="project-overlay">
                             <div class="project-links">
-                                <a href="#" class="project-link">
-                                    <i class="fas fa-external-link-alt"></i>
+                                <a href="#" class="project-btn">
+                                    <i class="fas fa-eye"></i>
+                                    <span>Preview</span>
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3>Web Scraping Tools</h3>
-                        <p>Collection of web scraping utilities for data extraction and automation tasks.</p>
-                        <div class="project-tags">
-                            <span class="tag">Node.js</span>
-                            <span class="tag">Puppeteer</span>
-                            <span class="tag">Automation</span>
+                        <div class="project-header">
+                            <h3>Modern Web Applications</h3>
+                            <div class="project-status">
+                                <span class="status-dot active"></span>
+                                <span>Multiple Projects</span>
+                            </div>
+                        </div>
+                        <p>Collection of responsive web applications built with modern frameworks, featuring smooth animations and intuitive user experiences.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Responsive</span>
                         </div>
                     </div>
                 </div>
@@ -294,55 +413,113 @@
             <div class="section-header">
                 <span class="section-tag">Let's connect</span>
                 <h2 class="section-title">Get In Touch</h2>
+                <div class="title-underline"></div>
             </div>
-            <div class="contact-content">
+            <div class="contact-grid">
                 <div class="contact-info">
-                    <div class="contact-card">
-                        <h3>Let's work together</h3>
-                        <p>I'm always interested in new opportunities and exciting projects. Feel free to reach out!</p>
-                        <div class="social-links">
-                            <a href="https://www.instagram.com/itzz.me_vihanga?igsh=MTljYWpqa2dndHdwcw==" class="social-link instagram">
-                                <i class="fab fa-instagram"></i>
-                                <span>Instagram</span>
-                            </a>
-                            <a href="#" class="social-link tiktok">
-                                <i class="fab fa-tiktok"></i>
-                                <span>TikTok</span>
-                            </a>
-                            <a href="https://www.facebook.com/profile.php?id=100092318475738&mibextid=ZbWKwL" class="social-link facebook">
-                                <i class="fab fa-facebook-f"></i>
-                                <span>Facebook</span>
-                            </a>
-                            <a href="https://t.me/vihanga_ashinshana" class="social-link telegram">
-                                <i class="fab fa-telegram"></i>
-                                <span>Telegram</span>
-                            </a>
-                            <a href="https://whatsapp.com/channel/0029Va9fA47HQbRvFFnNpN3o" class="social-link whatsapp">
-                                <i class="fab fa-whatsapp"></i>
-                                <span>WhatsApp</span>
-                            </a>
+                    <div class="contact-card glass-card">
+                        <div class="card-glow"></div>
+                        <h3>Let's Work Together</h3>
+                        <p>I'm always excited about new opportunities and interesting projects. Whether you have a question, want to collaborate, or just want to say hi, feel free to reach out!</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <span class="contact-label">Location</span>
+                                    <span class="contact-value">Sri Lanka</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <span class="contact-label">Age</span>
+                                    <span class="contact-value">16 Years Old</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <span class="contact-label">Status</span>
+                                    <span class="contact-value">Student & Developer</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <form class="form">
-                        <div class="form-group">
-                            <input type="text" class="form-input" placeholder="Your Name" required>
-                            <div class="form-focus"></div>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-input" placeholder="Your Email" required>
-                            <div class="form-focus"></div>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-input" placeholder="Your Message" rows="5" required></textarea>
-                            <div class="form-focus"></div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            <span>Send Message</span>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
+                <div class="social-section">
+                    <div class="social-grid">
+                        <a href="https://www.instagram.com/itzz.me_vihanga?igsh=MTljYWpqa2dndHdwcw==" class="social-card instagram glass-card">
+                            <div class="social-bg"></div>
+                            <div class="social-icon-large">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div class="social-info">
+                                <h4>Instagram</h4>
+                                <p>Follow my journey</p>
+                            </div>
+                            <div class="social-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="social-card tiktok glass-card">
+                            <div class="social-bg"></div>
+                            <div class="social-icon-large">
+                                <i class="fab fa-tiktok"></i>
+                            </div>
+                            <div class="social-info">
+                                <h4>TikTok</h4>
+                                <p>Creative content</p>
+                            </div>
+                            <div class="social-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=100092318475738&mibextid=ZbWKwL" class="social-card facebook glass-card">
+                            <div class="social-bg"></div>
+                            <div class="social-icon-large">
+                                <i class="fab fa-facebook-f"></i>
+                            </div>
+                            <div class="social-info">
+                                <h4>Facebook</h4>
+                                <p>Connect with me</p>
+                            </div>
+                            <div class="social-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        <a href="https://t.me/vihanga_ashinshana" class="social-card telegram glass-card">
+                            <div class="social-bg"></div>
+                            <div class="social-icon-large">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <div class="social-info">
+                                <h4>Telegram</h4>
+                                <p>Direct messages</p>
+                            </div>
+                            <div class="social-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        <a href="https://whatsapp.com/channel/0029Va9fA47HQbRvFFnNpN3o" class="social-card whatsapp glass-card">
+                            <div class="social-bg"></div>
+                            <div class="social-icon-large">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="social-info">
+                                <h4>WhatsApp</h4>
+                                <p>Join my channel</p>
+                            </div>
+                            <div class="social-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -352,19 +529,35 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-text">
-                    <p>&copy; 2024 Vihanga Ashinshana. All rights reserved.</p>
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <span class="logo-text">VihangaYT</span>
+                        <div class="logo-pulse"></div>
+                    </div>
+                    <p>Building the future, one line of code at a time.</p>
                 </div>
-                <div class="footer-links">
-                    <a href="#home">Back to Top</a>
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#skills">Skills</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Vihanga Ashinshana. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/itzz.me_vihanga?igsh=MTljYWpqa2dndHdwcw=="><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=100092318475738&mibextid=ZbWKwL"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://t.me/vihanga_ashinshana"><i class="fab fa-telegram"></i></a>
+                    <a href="https://whatsapp.com/channel/0029Va9fA47HQbRvFFnNpN3o"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
     </footer>
-
-    <!-- Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
 
     <script src="script.js"></script>
 </body>
