@@ -128,7 +128,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for animation
-document.querySelectorAll('.section-header, .skill-card, .about-content, .about-stats, .contact-info, .social-section, .stat-card').forEach(el => {
+document.querySelectorAll('.section-header, .skill-card, .about-content, .about-visual, .about-stats, .contact-info, .social-section, .stat-card').forEach(el => {
     observer.observe(el);
 });
 
@@ -227,6 +227,8 @@ const nameLines = document.querySelectorAll('.name-line');
 nameLines.forEach(line => {
     line.addEventListener('mouseenter', () => {
         line.style.animation = 'none';
+        line.style.opacity = '1';
+        line.style.transform = 'translateY(0)';
         line.style.textShadow = '2px 0 #ff00ff, -2px 0 #00ffff';
         setTimeout(() => {
             line.style.textShadow = 'none';
@@ -376,10 +378,9 @@ function populateSocialLinks(socialLinks) {
     const socialConfig = {
         instagram: { icon: 'fab fa-instagram', name: 'Instagram', description: 'Follow my journey' },
         telegram: { icon: 'fab fa-telegram', name: 'Telegram', description: 'Direct messages' },
-        whatsapp: { icon: 'fab fa-whatsapp', name: 'WhatsApp', description: 'Chat with me' },
-        tiktok: { icon: 'fab fa-tiktok', name: 'TikTok', description: 'Creative content' },
-        github: { icon: 'fab fa-github', name: 'GitHub', description: 'View my code' },
-        facebook: { icon: 'fab fa-facebook-f', name: 'Facebook', description: 'Connect with me' }
+        whatsapp: { icon: 'fab fa-whatsapp', name: 'WhatsApp', description: 'My updates' },
+        facebook: { icon: 'fab fa-facebook-f', name: 'Facebook', description: 'Connect with me' },
+        github: { icon: 'fab fa-github', name: 'GitHub', description: 'View my code' }
     };
 
     // Update hero section social preview

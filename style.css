@@ -495,21 +495,31 @@ body {
 .social-icon.instagram:hover {
     border-color: #E4405F;
     box-shadow: 0 10px 30px rgba(228, 64, 95, 0.3);
-}
-
-.social-icon.tiktok:hover {
-    border-color: #000000;
-    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+    color: #E4405F;
 }
 
 .social-icon.facebook:hover {
     border-color: #1877F2;
     box-shadow: 0 10px 30px rgba(24, 119, 242, 0.3);
+    color: #1877F2;
 }
 
 .social-icon.telegram:hover {
     border-color: #0088CC;
     box-shadow: 0 10px 30px rgba(0, 136, 204, 0.3);
+    color: #0088CC;
+}
+
+.social-icon.whatsapp:hover {
+    border-color: #25D366;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+    color: #25D366;
+}
+
+.social-icon.github:hover {
+    border-color: #333333;
+    box-shadow: 0 10px 30px rgba(51, 51, 51, 0.3);
+    color: #333333;
 }
 
 .hero-visual {
@@ -1323,10 +1333,6 @@ section {
 
 .social-card.instagram .social-bg {
     background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
-}
-
-.social-card.tiktok .social-bg {
-    background: linear-gradient(135deg, #000000 0%, #ff0050 100%);
 }
 
 .social-card.facebook .social-bg {
