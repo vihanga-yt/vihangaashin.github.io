@@ -140,12 +140,13 @@ body {
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     padding: 1rem 0;
+    text-decoration: none;
 }
 
 .nav-link::before {
     content: attr(data-text);
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 0;
     width: 100%;
     height: 100%;
@@ -155,6 +156,8 @@ body {
     background-clip: text;
     opacity: 0;
     transition: opacity 0.3s ease;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
 .nav-link::after {
@@ -172,6 +175,11 @@ body {
 .nav-link:hover::before,
 .nav-link.active::before {
     opacity: 1;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: transparent;
 }
 
 .nav-link:hover::after,
@@ -406,6 +414,7 @@ body {
     overflow: hidden;
     cursor: pointer;
     border: 2px solid transparent;
+    text-decoration: none;
 }
 
 .cta-btn.primary {

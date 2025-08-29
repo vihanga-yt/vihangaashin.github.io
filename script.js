@@ -14,14 +14,14 @@ document.addEventListener('mousemove', (e) => {
 
 // Cursor hover effects
 document.addEventListener('mouseenter', (e) => {
-    if (e.target.matches('a, button, .cta-btn, .social-card, .project-card')) {
+    if (e.target.matches('a, button, .cta-btn, .social-card')) {
         cursor.style.transform = 'scale(1.5)';
         cursorFollower.style.transform = 'scale(1.5)';
     }
 });
 
 document.addEventListener('mouseleave', (e) => {
-    if (e.target.matches('a, button, .cta-btn, .social-card, .project-card')) {
+    if (e.target.matches('a, button, .cta-btn, .social-card')) {
         cursor.style.transform = 'scale(1)';
         cursorFollower.style.transform = 'scale(1)';
     }
@@ -71,7 +71,8 @@ window.addEventListener('scroll', () => {
 
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href').includes(current)) {
+        const href = link.getAttribute('href');
+        if (href && href.includes(current) && current !== '') {
             link.classList.add('active');
         }
     });
@@ -127,7 +128,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for animation
-document.querySelectorAll('.section-header, .skill-card, .project-card, .about-content, .about-stats, .contact-info, .social-section, .stat-card').forEach(el => {
+document.querySelectorAll('.section-header, .skill-card, .about-content, .about-stats, .contact-info, .social-section, .stat-card').forEach(el => {
     observer.observe(el);
 });
 
@@ -192,7 +193,7 @@ function revealOnScroll() {
 window.addEventListener('scroll', revealOnScroll);
 
 // Add hover sound effect (optional)
-document.querySelectorAll('.cta-btn, .social-card, .project-card').forEach(element => {
+document.querySelectorAll('.cta-btn, .social-card').forEach(element => {
     element.addEventListener('mouseenter', () => {
         // Add subtle vibration for mobile devices
         if (navigator.vibrate) {
@@ -233,18 +234,90 @@ nameLines.forEach(line => {
     });
 });
 
+// Calculate dynamic age and coding years
+function calculateAge() {
+    const currentYear = new Date().getFullYear();
+    const birthYear = 2009;
+    const codingStartYear = 2021;
+    
+    return {
+        age: currentYear - birthYear,
+        codingYears: currentYear - codingStartYear
+    };
+}
+
+// Update dynamic content with calculated values
+function updateDynamicContent() {
+    const { age, codingYears } = calculateAge();
+    const currentYear = new Date().getFullYear();
+    
+    // Update current year in footer
+    const currentYearElement = document.getElementById('current-year');
+    if (currentYearElement) {
+        currentYearElement.textContent = currentYear;
+    }
+    
+    // Update hero description
+    const heroDescription = document.querySelector('.hero-description');
+    if (heroDescription) {
+        heroDescription.textContent = `${age}-year-old passionate developer from Sri Lanka, crafting innovative digital experiences with JavaScript, Node.js, and modern web technologies.`;
+    }
+    
+    // Update about section description
+    const aboutDescription = document.querySelector('.about-card p:first-of-type');
+    if (aboutDescription) {
+        aboutDescription.textContent = `I'm a ${age}-year-old full stack developer from Sri Lanka with an insatiable passion for technology and innovation. Currently balancing my studies while diving deep into the world of web development, creating solutions that make a difference.`;
+    }
+    
+    const aboutJourney = document.querySelector('.about-card p:nth-of-type(2)');
+    if (aboutJourney) {
+        aboutJourney.textContent = `My journey in programming started ${codingYears} years ago, and since then I've been constantly learning and building projects that challenge my skills and expand my knowledge in modern web technologies.`;
+    }
+    
+    // Update contact section age
+    const contactAgeElements = document.querySelectorAll('.contact-value');
+    contactAgeElements.forEach(element => {
+        if (element.textContent.includes('Years Old')) {
+            element.textContent = `${age} Years Old`;
+        }
+    });
+    
+    // Update stat cards
+    const statCards = document.querySelectorAll('.stat-card');
+    statCards.forEach(card => {
+        const statNumber = card.querySelector('.stat-number');
+        const statLabel = card.querySelector('.stat-label');
+        
+        if (statLabel) {
+            if (statLabel.textContent === 'Years Old') {
+                statNumber.setAttribute('data-target', age);
+                statNumber.textContent = '0'; // Reset for animation
+            } else if (statLabel.textContent === 'Years Coding') {
+                statNumber.setAttribute('data-target', codingYears);
+                statNumber.textContent = '0'; // Reset for animation
+            }
+        }
+    });
+    
+    // Update code window age display
+    const ageCodeLine = document.querySelector('.code-line:nth-child(3) .number');
+    if (ageCodeLine) {
+        ageCodeLine.textContent = age;
+    }
+}
+
 // Initialize animations on page load
 document.addEventListener('DOMContentLoaded', () => {
+    // Update dynamic content (age, coding years)
+    updateDynamicContent();
+    
+    // Fetch social media links from API
+    fetchSocialLinks();
+    
     // Add stagger animation to skill cards
     const skillCards = document.querySelectorAll('.skill-card');
     skillCards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.2}s`;
-    });
-    
-    // Add stagger animation to project cards
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.3}s`;
     });
 });
 
@@ -281,3 +354,104 @@ function createParticle(x, y) {
         particle.remove();
     };
 }
+
+// Fetch and populate social media links from API
+async function fetchSocialLinks() {
+    try {
+        const response = await fetch('https://raw.githubusercontent.com/vihanga-yt/AboutMe-Api/refs/heads/main/about.json');
+        const data = await response.json();
+        
+        if (data.social_links) {
+            populateSocialLinks(data.social_links);
+        }
+    } catch (error) {
+        console.error('Error fetching social links:', error);
+        // Keep existing hardcoded links as fallback
+    }
+}
+
+// Populate social media links in hero section and contact section
+function populateSocialLinks(socialLinks) {
+    // Map social media platforms to their FontAwesome icons and display names
+    const socialConfig = {
+        instagram: { icon: 'fab fa-instagram', name: 'Instagram', description: 'Follow my journey' },
+        telegram: { icon: 'fab fa-telegram', name: 'Telegram', description: 'Direct messages' },
+        whatsapp: { icon: 'fab fa-whatsapp', name: 'WhatsApp', description: 'Chat with me' },
+        tiktok: { icon: 'fab fa-tiktok', name: 'TikTok', description: 'Creative content' },
+        github: { icon: 'fab fa-github', name: 'GitHub', description: 'View my code' },
+        facebook: { icon: 'fab fa-facebook-f', name: 'Facebook', description: 'Connect with me' }
+    };
+
+    // Update hero section social preview
+    const socialPreview = document.querySelector('.social-preview');
+    if (socialPreview) {
+        socialPreview.innerHTML = '';
+        
+        Object.entries(socialLinks).forEach(([platform, url]) => {
+            if (url && url !== '#' && socialConfig[platform]) {
+                const config = socialConfig[platform];
+                const socialIcon = document.createElement('a');
+                socialIcon.href = url;
+                socialIcon.className = `social-icon ${platform}`;
+                socialIcon.target = '_blank';
+                socialIcon.rel = 'noopener noreferrer';
+                socialIcon.innerHTML = `<i class="${config.icon}"></i>`;
+                socialPreview.appendChild(socialIcon);
+            }
+        });
+    }
+
+    // Update contact section social grid
+    const socialGrid = document.querySelector('.social-grid');
+    if (socialGrid) {
+        socialGrid.innerHTML = '';
+        
+        Object.entries(socialLinks).forEach(([platform, url]) => {
+            if (url && url !== '#' && socialConfig[platform]) {
+                const config = socialConfig[platform];
+                const socialCard = document.createElement('a');
+                socialCard.href = url;
+                socialCard.className = `social-card ${platform} glass-card`;
+                socialCard.target = '_blank';
+                socialCard.rel = 'noopener noreferrer';
+                
+                socialCard.innerHTML = `
+                    <div class="social-bg"></div>
+                    <div class="social-icon-large">
+                        <i class="${config.icon}"></i>
+                    </div>
+                    <div class="social-info">
+                        <h4>${config.name}</h4>
+                        <p>${config.description}</p>
+                    </div>
+                    <div class="social-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                `;
+                
+                socialGrid.appendChild(socialCard);
+            }
+        });
+    }
+
+    // Update footer social links
+    const footerSocial = document.querySelector('.footer-social');
+    if (footerSocial) {
+        footerSocial.innerHTML = '';
+        
+        Object.entries(socialLinks).forEach(([platform, url]) => {
+            if (url && url !== '#' && socialConfig[platform]) {
+                const config = socialConfig[platform];
+                const footerLink = document.createElement('a');
+                footerLink.href = url;
+                footerLink.target = '_blank';
+                footerLink.rel = 'noopener noreferrer';
+                footerLink.innerHTML = `<i class="${config.icon}"></i>`;
+                footerSocial.appendChild(footerLink);
+            }
+        });
+    }
+}
+
+// Fetch social links on page load
+window.addEventListener('load', fetchSocialLinks);

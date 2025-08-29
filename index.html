@@ -24,7 +24,6 @@
                 <a href="#home" class="nav-link active" data-text="Home">Home</a>
                 <a href="#about" class="nav-link" data-text="About">About</a>
                 <a href="#skills" class="nav-link" data-text="Skills">Skills</a>
-                <a href="#projects" class="nav-link" data-text="Projects">Projects</a>
                 <a href="#contact" class="nav-link" data-text="Contact">Contact</a>
             </div>
             <div class="nav-toggle" id="nav-toggle">
@@ -64,12 +63,12 @@
                     <span class="cursor-blink">|</span>
                 </div>
                 <p class="hero-description">
-                    16-year-old passionate developer from Sri Lanka, crafting innovative 
+                    Passionate developer from Sri Lanka, crafting innovative 
                     digital experiences with JavaScript, Node.js, and modern web technologies.
                 </p>
                 <div class="hero-cta">
-                    <a href="#projects" class="cta-btn primary">
-                        <span class="btn-text">View My Work</span>
+                    <a href="#skills" class="cta-btn primary">
+                        <span class="btn-text">View My Skills</span>
                         <div class="btn-icon">
                             <i class="fas fa-arrow-right"></i>
                         </div>
@@ -81,18 +80,7 @@
                     </a>
                 </div>
                 <div class="social-preview">
-                    <a href="https://www.instagram.com/itzz.me_vihanga?igsh=MTljYWpqa2dndHdwcw==" class="social-icon instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="social-icon tiktok">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
-                    <a href="https://www.facebook.com/profile.php?id=100092318475738&mibextid=ZbWKwL" class="social-icon facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://t.me/vihanga_ashinshana" class="social-icon telegram">
-                        <i class="fab fa-telegram"></i>
-                    </a>
+                    <!-- Social media links will be populated dynamically from API -->
                 </div>
             </div>
             <div class="hero-visual">
@@ -124,7 +112,7 @@
                             <span class="line-number">3</span>
                             <span class="code-text">
                                 &nbsp;&nbsp;<span class="property">age</span>: 
-                                <span class="number">16</span>,
+                                <span class="number">0</span>,
                             </span>
                         </div>
                         <div class="code-line">
@@ -172,13 +160,13 @@
                         <div class="card-glow"></div>
                         <h3>Who I Am</h3>
                         <p>
-                            I'm a 16-year-old full stack developer from Sri Lanka with an insatiable 
+                            I'm a full stack developer from Sri Lanka with an insatiable 
                             passion for technology and innovation. Currently balancing my studies 
                             while diving deep into the world of web development, creating solutions 
                             that make a difference.
                         </p>
                         <p>
-                            My journey in programming started 3 years ago, and since then I've been 
+                            My journey in programming started years ago, and since then I've been 
                             constantly learning and building projects that challenge my skills and 
                             expand my knowledge in modern web technologies.
                         </p>
@@ -205,7 +193,7 @@
                                 <i class="fas fa-birthday-cake"></i>
                             </div>
                             <div class="stat-info">
-                                <span class="stat-number" data-target="16">0</span>
+                                <span class="stat-number" data-target="0">0</span>
                                 <span class="stat-label">Years Old</span>
                             </div>
                         </div>
@@ -214,7 +202,7 @@
                                 <i class="fas fa-code"></i>
                             </div>
                             <div class="stat-info">
-                                <span class="stat-number" data-target="3">0</span>
+                                <span class="stat-number" data-target="0">0</span>
                                 <span class="stat-label">Years Coding</span>
                             </div>
                         </div>
@@ -307,106 +295,6 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">My work</span>
-                <h2 class="section-title">Featured Projects</h2>
-                <div class="title-underline"></div>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card glass-card">
-                    <div class="project-image">
-                        <div class="project-bg api-bg"></div>
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://api.vihangayt.com/" class="project-btn">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>Live Demo</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3>VihangaYT API</h3>
-                            <div class="project-status">
-                                <span class="status-dot active"></span>
-                                <span>Live</span>
-                            </div>
-                        </div>
-                        <p>Comprehensive REST API platform with 100+ endpoints featuring AI tools, downloaders, and developer utilities used by thousands of developers worldwide.</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">Express</span>
-                            <span class="tech-tag">REST API</span>
-                            <span class="tech-tag">MongoDB</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card glass-card">
-                    <div class="project-image">
-                        <div class="project-bg bot-bg"></div>
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-btn">
-                                    <i class="fab fa-github"></i>
-                                    <span>View Code</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3>WhatsApp Bot Framework</h3>
-                            <div class="project-status">
-                                <span class="status-dot"></span>
-                                <span>In Development</span>
-                            </div>
-                        </div>
-                        <p>Advanced WhatsApp automation bot using Baileys library with AI integration, media processing, and multi-device support.</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Baileys</span>
-                            <span class="tech-tag">AI</span>
-                            <span class="tech-tag">Automation</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card glass-card">
-                    <div class="project-image">
-                        <div class="project-bg web-bg"></div>
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-btn">
-                                    <i class="fas fa-eye"></i>
-                                    <span>Preview</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3>Modern Web Applications</h3>
-                            <div class="project-status">
-                                <span class="status-dot active"></span>
-                                <span>Multiple Projects</span>
-                            </div>
-                        </div>
-                        <p>Collection of responsive web applications built with modern frameworks, featuring smooth animations and intuitive user experiences.</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS3</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Responsive</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
@@ -437,7 +325,7 @@
                                 </div>
                                 <div class="contact-text">
                                     <span class="contact-label">Age</span>
-                                    <span class="contact-value">16 Years Old</span>
+                                    <span class="contact-value">Years Old</span>
                                 </div>
                             </div>
                             <div class="contact-item">
@@ -454,71 +342,7 @@
                 </div>
                 <div class="social-section">
                     <div class="social-grid">
-                        <a href="https://www.instagram.com/itzz.me_vihanga?igsh=MTljYWpqa2dndHdwcw==" class="social-card instagram glass-card">
-                            <div class="social-bg"></div>
-                            <div class="social-icon-large">
-                                <i class="fab fa-instagram"></i>
-                            </div>
-                            <div class="social-info">
-                                <h4>Instagram</h4>
-                                <p>Follow my journey</p>
-                            </div>
-                            <div class="social-arrow">
-                                <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="social-card tiktok glass-card">
-                            <div class="social-bg"></div>
-                            <div class="social-icon-large">
-                                <i class="fab fa-tiktok"></i>
-                            </div>
-                            <div class="social-info">
-                                <h4>TikTok</h4>
-                                <p>Creative content</p>
-                            </div>
-                            <div class="social-arrow">
-                                <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </a>
-                        <a href="https://www.facebook.com/profile.php?id=100092318475738&mibextid=ZbWKwL" class="social-card facebook glass-card">
-                            <div class="social-bg"></div>
-                            <div class="social-icon-large">
-                                <i class="fab fa-facebook-f"></i>
-                            </div>
-                            <div class="social-info">
-                                <h4>Facebook</h4>
-                                <p>Connect with me</p>
-                            </div>
-                            <div class="social-arrow">
-                                <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </a>
-                        <a href="https://t.me/vihanga_ashinshana" class="social-card telegram glass-card">
-                            <div class="social-bg"></div>
-                            <div class="social-icon-large">
-                                <i class="fab fa-telegram"></i>
-                            </div>
-                            <div class="social-info">
-                                <h4>Telegram</h4>
-                                <p>Direct messages</p>
-                            </div>
-                            <div class="social-arrow">
-                                <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </a>
-                        <a href="https://whatsapp.com/channel/0029Va9fA47HQbRvFFnNpN3o" class="social-card whatsapp glass-card">
-                            <div class="social-bg"></div>
-                            <div class="social-icon-large">
-                                <i class="fab fa-whatsapp"></i>
-                            </div>
-                            <div class="social-info">
-                                <h4>WhatsApp</h4>
-                                <p>Join my channel</p>
-                            </div>
-                            <div class="social-arrow">
-                                <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </a>
+                        <!-- Social media cards will be populated dynamically from API -->
                     </div>
                 </div>
             </div>
@@ -541,19 +365,14 @@
                         <a href="#home">Home</a>
                         <a href="#about">About</a>
                         <a href="#skills">Skills</a>
-                        <a href="#projects">Projects</a>
                         <a href="#contact">Contact</a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Vihanga Ashinshana. All rights reserved.</p>
+                <p>&copy; <span id="current-year">2024</span> Vihanga Ashinshana. All rights reserved.</p>
                 <div class="footer-social">
-                    <a href="https://www.instagram.com/itzz.me_vihanga?igsh=MTljYWpqa2dndHdwcw=="><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://www.facebook.com/profile.php?id=100092318475738&mibextid=ZbWKwL"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://t.me/vihanga_ashinshana"><i class="fab fa-telegram"></i></a>
-                    <a href="https://whatsapp.com/channel/0029Va9fA47HQbRvFFnNpN3o"><i class="fab fa-whatsapp"></i></a>
+                    <!-- Social media links will be populated dynamically from API -->
                 </div>
             </div>
         </div>
