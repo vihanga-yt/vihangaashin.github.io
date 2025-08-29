@@ -1,187 +1,371 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <title>VihangaYT</title>
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-     <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vihanga Ashinshana - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">VihangaYT</span>
+                <div class="logo-dot"></div>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
 
-     <!-- header section -->
-     <header class="header">
-          <a href="#" class="logo">VihangaYT<span class="animate" style="--i:1;"></span></a>
-          <div class="fa-solid fa-bars" id="menu-icon"><span class="animate" style="--i:2;"></span></div>
-          <nav class="navbar">
-               <a href="#home" class="active">Home</a>
-               <a href="#about">About</a>
-               <a href="#education">Education</a>
-               <a href="#skills">Skills</a>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="greeting">
+                    <span class="wave">👋</span>
+                    <span>Hello, I'm</span>
+                </div>
+                <h1 class="hero-name">
+                    <span class="name-part">Vihanga</span>
+                    <span class="name-part">Ashinshana</span>
+                </h1>
+                <div class="hero-title">
+                    <span class="title-text">Full Stack Developer</span>
+                    <div class="title-cursor"></div>
+                </div>
+                <p class="hero-description">
+                    16-year-old passionate developer from Sri Lanka, crafting digital experiences 
+                    with JavaScript, Node.js, and modern web technologies.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <span>View My Work</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span>Get In Touch</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-container">
+                    <div class="image-blur"></div>
+                    <div class="image-glow"></div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-text">Scroll Down</div>
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
 
-               <span class="active-nav"></span>
-               <span class="animate" style="--i:2;"></span>
-          </nav>
-     </header>
-
-     <!-- home section design -->
-     <section class="home show-animate" id="home">
-          <div class="home-content">
-               <h1>Hi, I'm <span>Vihanga Ashinshana</span><span class="animate" style="--i:2;"></span></h1>
-               <div class="text-animate">
-                    <h3>Backend Developer</h3>
-                    <span class="animate" style="--i:3;"></span>
-               </div>
-               <p>I am a student from Sri Lanka. I'm 15 years old. I love programming. My hobby is creating whatsapp bots and creating websites. This is the official page I made for my projects. My favourite coding languages are Nodejs,Html and Go.<span class="animate" style="--i:4;"></span></p>
-               <div class="btn-box">
-                    <a href="https://api.vihangayt.com/" class="btn">Api Site</a>
-                    <a href="https://whatsapp.com/channel/0029Va9fA47HQbRvFFnNpN3o" class="btn">Community</a>
-                    <span class="animate" style="--i:5;"></span>
-               </div>
-          </div>
-          <div class="home-sci">
-              <a href="https://www.facebook.com/profile.php?id=100092318475738&mibextid=ZbWKwL"><i class="fa-brands fa-facebook-f"></i></a>
-              <a href="https://www.instagram.com/itzz.me_vihanga?igsh=MTljYWpqa2dndHdwcw=="><i class="fa-brands fa-instagram"></i></a>
-              <a href="https://t.me/vihanga_ashinshana"><i class="fa-brands fa-telegram"></i></a>
-              <span class="animate" style="--i:6;"></span>
-          </div>
-          <div class="home-imgHover"></div>
-          <span class="animate home-img" style="--i:7;"></span>
-     </section>
-
-     <!-- about section design -->
-     <section class="about" id="about">
-          <h2 class="heading">About <span>Me</span><span class="animate scroll" style="--i:1;"></span></h2>
-          <div class="about-img">
-               <img src="img/about.jpeg">
-               <span class="circle-spin"></span>
-               <span class="animate scroll" style="--i:2;"></span>
-          </div>
-          <div class="about-content">
-               <h3>Backend Developer <span class="animate scroll" style="--i:3;"></span></h3>
-               <p>I am a student from Sri Lanka. I'm 15 years old. I love programming. My hobby is creating whatsapp bots and creating websites. This is the official page I made for my projects. My favourite coding languages are Nodejs,Html and Go.<span class="animate scroll" style="--i:4;"></span></p>
-               <div class="btn-box btns">
-                    <a href="https://github.com/anonymous-lll" class="btn">Github</a>
-                    <span class="animate scroll" style="--i:5;"></span>
-               </div>
-
-          </div>
-     </section>
-
-     <!-- education section design -->
-     <section class="education" id="education">
-          <h2 class="heading">My <span>Journey</span><span class="animate scroll" style="--i:1;"></span></h2>
-          <div class="education-row">
-               <div class="education-column">
-                    <h3 class="title">Projects<span class="animate scroll" style="--i:2;"></span></h3>
-                    <div class="education-box">
-                         <div class="education-content">
-                              <div class="content">
-                                   <div class="year"><i class="fa-solid fa-calendar-days"></i> 2021 - 2024</div>
-                                   <h3>Whatsapp Bot</h3>
-                                   <p>A whatsapp bot using bailyes library. Easy to use and simple.</p>
-                              </div>
-                         </div>
-                         <div class="education-content">
-                              <div class="content">
-                                   <div class="year"><i class="fa-solid fa-calendar-days"></i> 2022 - 2024</div>
-                                   <h3>VihangaYT Api Site</h3>
-                                   <p>Rest Api site for developers. 100+ Apis with ai, downloading and tools features.</p>
-                              </div>
-                         </div>
-                         <span class="animate scroll" style="--i:3;"></span>
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Get to know me</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-card">
+                        <div class="card-content">
+                            <h3>Who I Am</h3>
+                            <p>
+                                I'm a 16-year-old developer from Sri Lanka with a passion for creating 
+                                innovative digital solutions. Currently pursuing my studies while 
+                                building my expertise in web development and backend technologies.
+                            </p>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-number">16</span>
+                                    <span class="stat-label">Years Old</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">3+</span>
+                                    <span class="stat-label">Years Coding</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">50+</span>
+                                    <span class="stat-label">Projects</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-               </div>
-               <div class="education-column">
-                    <h3 class="title">Experience<span class="animate scroll" style="--i:4;"></span></h3>
-                    <div class="education-box">
-                         <div class="education-content">
-                              <div class="content">
-                                   <div class="year"><i class="fa-solid fa-calendar-days"></i> 2023</div>
-                                   <h3>Javascript 30 days challange</h3>
-                                   <p>Compleated 30 days javascript challange.</p>
-                              </div>
-                         </div>
-                         <div class="education-content">
-                              <div class="content">
-                                   <div class="year"><i class="fa-solid fa-calendar-days"></i> 2021-2024</div>
-                                   <h3>Learned Go, Js, Html, Css</h3>
-                                   <p>Learned Nodejs, Go, Html and css simply using youtube, chatgpt and google.</p>
-                              </div>
-                         </div>
-                         <span class="animate scroll" style="--i:5;"></span>
+                </div>
+                <div class="about-image">
+                    <div class="image-wrapper">
+                        <div class="profile-image">
+                            <div class="image-overlay"></div>
+                        </div>
+                        <div class="floating-elements">
+                            <div class="element element-1">
+                                <i class="fab fa-js-square"></i>
+                            </div>
+                            <div class="element element-2">
+                                <i class="fab fa-node-js"></i>
+                            </div>
+                            <div class="element element-3">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <div class="element element-4">
+                                <i class="fab fa-css3-alt"></i>
+                            </div>
+                        </div>
                     </div>
-               </div>
-          </div>
-     </section>
+                </div>
+            </div>
+        </div>
+    </section>
 
-     <!-- skills section design -->
-     <section class="skills" id="skills">
-          <h2 class="heading">My <span>Skills</span><span class="animate scroll" style="--i:1;"></span></h2>
-          <div class="skills-row">
-               <div class="skills-column">
-                    <h3 class="title">Coding Skills<span class="animate scroll" style="--i:2;"></span></h3>
-                    <div class="skills-box">
-                         <div class="skills-content">
-                              <div class="progress">
-                                   <h3>NodeJs <span>90%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                              <div class="progress">
-                                   <h3>Html <span>70%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                              <div class="progress">
-                                   <h3>Go <span>50%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                              <div class="progress">
-                                   <h3>Css <span>30%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                         </div>
-                         <span class="animate scroll" style="--i:3;"></span>
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">What I do</span>
+                <h2 class="section-title">My Skills</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-js-square"></i>
                     </div>
-               </div>
-               <div class="skills-column">
-                    <h3 class="title">Professional Skills<span class="animate scroll" style="--i:4;"></span></h3>
-                    <div class="skills-box">
-                         <div class="skills-content">
-                              <div class="progress">
-                                   <h3>Whatsapp Bots Development <span>95%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                              <div class="progress">
-                                   <h3>Web Scraping <span>70%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                              <div class="progress">
-                                   <h3>Web Design <span>65%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                              <div class="progress">
-                                   <h3>Graphic Design <span>40%</span></h3>
-                                   <div class="bar"><span></span></div>
-                              </div>
-                         </div>
-                         <span class="animate scroll" style="--i:5;"></span>
+                    <h3>JavaScript</h3>
+                    <p>Modern ES6+ JavaScript for dynamic and interactive web applications</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="90"></div>
                     </div>
-               </div>
-          </div>
-     </section>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <h3>Node.js</h3>
+                    <p>Server-side development with Express.js and RESTful API creation</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="85"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3>HTML5</h3>
+                    <p>Semantic markup and modern HTML5 features for web structure</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="95"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <h3>CSS3</h3>
+                    <p>Advanced styling with animations, flexbox, and responsive design</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="80"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>WhatsApp Bots</h3>
+                    <p>Creating intelligent chatbots using Baileys library</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="95"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>API Development</h3>
+                    <p>Building robust REST APIs and backend services</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" data-level="88"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">My work</span>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://api.vihangayt.com/" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>VihangaYT API</h3>
+                        <p>Comprehensive REST API platform with 100+ endpoints featuring AI, downloading tools, and developer utilities.</p>
+                        <div class="project-tags">
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Express</span>
+                            <span class="tag">API</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>WhatsApp Bot Framework</h3>
+                        <p>Advanced WhatsApp bot using Baileys library with multiple features and easy deployment.</p>
+                        <div class="project-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Baileys</span>
+                            <span class="tag">Bot</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Web Scraping Tools</h3>
+                        <p>Collection of web scraping utilities for data extraction and automation tasks.</p>
+                        <div class="project-tags">
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Puppeteer</span>
+                            <span class="tag">Automation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-     <!-- footer design -->
-     <footer class="footer">
-          <div class="footer-text">
-               <p>Copyright &copy; 2024 by VihangaYT | All Rights Reserved</p>
-               <span class="animate scroll" style="--i:1;"></span>
-          </div>
-          <div class="footer-iconTop">
-               <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
-               <span class="animate scroll" style="--i:2;"></span>
-          </div>
-     </footer>
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Let's connect</span>
+                <h2 class="section-title">Get In Touch</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3>Let's work together</h3>
+                        <p>I'm always interested in new opportunities and exciting projects. Feel free to reach out!</p>
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/itzz.me_vihanga?igsh=MTljYWpqa2dndHdwcw==" class="social-link instagram">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                            <a href="#" class="social-link tiktok">
+                                <i class="fab fa-tiktok"></i>
+                                <span>TikTok</span>
+                            </a>
+                            <a href="https://www.facebook.com/profile.php?id=100092318475738&mibextid=ZbWKwL" class="social-link facebook">
+                                <i class="fab fa-facebook-f"></i>
+                                <span>Facebook</span>
+                            </a>
+                            <a href="https://t.me/vihanga_ashinshana" class="social-link telegram">
+                                <i class="fab fa-telegram"></i>
+                                <span>Telegram</span>
+                            </a>
+                            <a href="https://whatsapp.com/channel/0029Va9fA47HQbRvFFnNpN3o" class="social-link whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form class="form">
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Your Name" required>
+                            <div class="form-focus"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-input" placeholder="Your Email" required>
+                            <div class="form-focus"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-input" placeholder="Your Message" rows="5" required></textarea>
+                            <div class="form-focus"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-     <script src="script.js"></script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2024 Vihanga Ashinshana. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">Back to Top</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
+    <!-- Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
