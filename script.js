@@ -380,8 +380,14 @@ function populateSocialLinks(socialLinks) {
         telegram: { icon: 'fab fa-telegram', name: 'Telegram', description: 'Direct messages' },
         whatsapp: { icon: 'fab fa-whatsapp', name: 'WhatsApp', description: 'My updates' },
         facebook: { icon: 'fab fa-facebook-f', name: 'Facebook', description: 'Connect with me' },
-        github: { icon: 'fab fa-github', name: 'GitHub', description: 'View my code' }
+        github: { icon: 'fab fa-github', name: 'GitHub', description: 'View my code' },
+        buymeacoffee: { icon: 'fas fa-coffee', name: 'Buy me a coffee', description: 'Support my work' }
     };
+
+    // Ensure Buy Me a Coffee is always included
+    if (!socialLinks.buymeacoffee) {
+        socialLinks.buymeacoffee = 'https://buymeacoffee.com/vihangayt0';
+    }
 
     // Update hero section social preview
     const socialPreview = document.querySelector('.social-preview');

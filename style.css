@@ -203,6 +203,36 @@ body {
     border-radius: 2px;
 }
 
+/* Buy Me a Coffee Button */
+.bmc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    background: #FFDD00;
+    color: #000000;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 2px solid #FFDD00;
+    white-space: nowrap;
+}
+
+.bmc-btn:hover,
+.bmc-btn:focus {
+    background: #000000;
+    color: #FFDD00;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 221, 0, 0.3);
+    outline: none;
+}
+
+.bmc-btn:focus {
+    box-shadow: 0 0 0 3px rgba(255, 221, 0, 0.5);
+}
+
 /* Hero Section */
 .hero {
     min-height: 100vh;
@@ -520,6 +550,12 @@ body {
     border-color: #333333;
     box-shadow: 0 10px 30px rgba(51, 51, 51, 0.3);
     color: #333333;
+}
+
+.social-icon.buymeacoffee:hover {
+    border-color: #FFDD00;
+    box-shadow: 0 10px 30px rgba(255, 221, 0, 0.3);
+    color: #FFDD00;
 }
 
 .hero-visual {
@@ -1347,6 +1383,10 @@ section {
     background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
 }
 
+.social-card.buymeacoffee .social-bg {
+    background: linear-gradient(135deg, #FFDD00 0%, #FF813F 100%);
+}
+
 .social-card:hover .social-bg {
     opacity: 0.1;
 }
@@ -1694,6 +1734,10 @@ section {
 
     .nav-toggle.active .hamburger-line:nth-child(3) {
         transform: rotate(-45deg) translate(8px, -8px);
+    }
+
+    .nav-menu .bmc-btn {
+        margin-top: 2rem;
     }
 
     .hero-name {
