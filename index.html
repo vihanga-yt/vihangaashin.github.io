@@ -1,164 +1,319 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vihanga Ashinshana - Full Stack Developer</title>
+    <!-- Dynamic Favicon/OG Image Placeholder (Will be set by JS after fetching) -->
+    <link rel="icon" id="favicon" href="https://placehold.co/32x32/0a0a0a/667eea?text=VYT">
+    <meta property="og:image" id="og-image" content="https://placehold.co/1200x630/0a0a0a/667eea?text=Vihanga+Ashinshana+Portfolio">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        dark: '#0a0a0a',
+                        primary: '#667eea',
+                        secondary: '#764ba2',
+                        accent: '#f093fb',
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles for things Tailwind handles awkwardly */
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            /* Default cursor for mobile/fallback */
+            cursor: auto; 
+        }
+
+        /* Custom Cursor Styles */
+        .cursor {
+            pointer-events: none;
+            position: fixed;
+            z-index: 9999;
+            mix-blend-mode: difference;
+        }
+        .cursor-dot {
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            transition: transform 0.1s;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(102, 126, 234, 0.5);
+            border-radius: 50%;
+            transition: transform 0.15s ease-out;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Hide Custom Cursor on Mobile/Touch Devices */
+        @media (pointer: coarse) {
+            .cursor {
+                display: none !important;
+            }
+            body {
+                cursor: auto !important;
+            }
+        }
+        
+        /* Force hide on small screens just in case */
+        @media (max-width: 768px) {
+            .cursor {
+                display: none !important;
+            }
+        }
+
+        /* Enable custom cursor only on fine pointer devices (mouse) */
+        @media (pointer: fine) {
+            body {
+                cursor: none;
+            }
+        }
+
+        /* Glass Card Utility */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 10, 10, 0.8);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+
+        /* Grid Background Pattern */
+        .bg-grid-pattern {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* Animation Classes for JS Observer */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Text Gradient Utility */
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
 </head>
-<body>
-    <!-- Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+<body class="antialiased selection:bg-primary selection:text-white">
+
+    <!-- Custom Cursor -->
+    <div class="cursor cursor-dot hidden md:block" id="cursor-dot"></div>
+    <div class="cursor cursor-outline hidden md:block" id="cursor-outline"></div>
 
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-text">VihangaYT</span>
-                <div class="logo-pulse"></div>
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="absolute inset-0 bg-dark/70 backdrop-blur-md border-b border-white/5 shadow-lg"></div>
+        <div class="container mx-auto px-6 relative">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="group flex items-center gap-2 z-50">
+                    <span class="text-2xl font-black text-gradient">VihangaYT</span>
+                    <div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex gap-8 items-center">
+                    <a href="#home" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors relative group py-2">Home</a>
+                    <a href="#about" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors relative group py-2">About</a>
+                    <a href="#skills" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors relative group py-2">Skills</a>
+                    <a href="#projects" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors relative group py-2">Projects</a>
+                    <a href="#contact" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors relative group py-2">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="nav-toggle" class="md:hidden z-50 flex flex-col gap-1.5 p-2 group">
+                    <span class="w-6 h-0.5 bg-white transition-all group-hover:bg-primary"></span>
+                    <span class="w-4 h-0.5 bg-white transition-all group-hover:bg-primary ml-auto"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all group-hover:bg-primary"></span>
+                </button>
             </div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link active" data-text="Home">Home</a>
-                <a href="#about" class="nav-link" data-text="About">About</a>
-                <a href="#skills" class="nav-link" data-text="Skills">Skills</a>
-                <a href="#contact" class="nav-link" data-text="Contact">Contact</a>
-            </div>
-            <div class="nav-toggle" id="nav-toggle">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-dark/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-300 flex items-center justify-center md:hidden">
+            <div class="flex flex-col gap-8 text-center">
+                <a href="#home" class="mobile-link text-2xl font-bold text-white hover:text-primary transition-colors">Home</a>
+                <a href="#about" class="mobile-link text-2xl font-bold text-white hover:text-primary transition-colors">About</a>
+                <a href="#skills" class="mobile-link text-2xl font-bold text-white hover:text-primary transition-colors">Skills</a>
+                <a href="#projects" class="mobile-link text-2xl font-bold text-white hover:text-primary transition-colors">Projects</a>
+                <a href="#contact" class="mobile-link text-2xl font-bold text-white hover:text-primary transition-colors">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-bg">
-            <div class="gradient-orb orb-1"></div>
-            <div class="gradient-orb orb-2"></div>
-            <div class="gradient-orb orb-3"></div>
-            <div class="particles">
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-            </div>
+    <section id="home" class="min-h-screen relative flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] animate-blob"></div>
+            <div class="absolute top-1/3 right-1/4 w-80 h-80 bg-secondary/20 rounded-full blur-[100px] animate-blob animation-delay-2000"></div>
+            <div class="absolute bottom-1/4 left-1/3 w-80 h-80 bg-accent/20 rounded-full blur-[100px] animate-blob animation-delay-4000"></div>
         </div>
-        <div class="hero-content">
-            <div class="hero-text">
-                <div class="greeting">
-                    <span class="wave-emoji">👋</span>
-                    <span class="greeting-text">Hello, I'm</span>
+        
+        <div class="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center flex-col-reverse lg:flex-row">
+            <!-- Content -->
+            <div class="text-center lg:text-left space-y-6 reveal order-2 lg:order-1">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card">
+                    <span class="animate-bounce">👋</span>
+                    <span class="text-sm font-medium text-gray-300">Hello, I'm</span>
                 </div>
-                <h1 class="hero-name">
-                    <span class="name-line">Vihanga</span>
-                    <span class="name-line">Ashinshana</span>
+                
+                <h1 class="text-5xl lg:text-7xl font-black tracking-tight leading-tight">
+                    <span class="block text-white">Vihanga</span>
+                    <span class="block text-gradient">Ashinshana</span>
                 </h1>
-                <div class="hero-subtitle">
+
+                <div class="flex items-center justify-center lg:justify-start gap-3 text-xl lg:text-2xl font-semibold text-gray-300">
                     <span class="typing-text">Full Stack Developer</span>
-                    <span class="cursor-blink">|</span>
+                    <span class="w-0.5 h-6 bg-primary animate-pulse"></span>
                 </div>
-                <p class="hero-description">
+
+                <p class="text-gray-400 text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 hero-description">
                     Passionate developer from Sri Lanka, crafting innovative 
                     digital experiences with JavaScript, Node.js, and modern web technologies.
                 </p>
-                <div class="hero-cta">
-                    <a href="#skills" class="cta-btn primary">
-                        <span class="btn-text">View My Skills</span>
-                        <div class="btn-icon">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                        <div class="btn-bg"></div>
+
+                <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start pt-4">
+                    <a href="#projects" class="px-8 py-4 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 transition-all flex items-center gap-2 group">
+                        View My Work
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                     </a>
-                    <a href="#contact" class="cta-btn secondary">
-                        <span class="btn-text">Let's Connect</span>
-                        <div class="btn-bg"></div>
+                    <a href="#contact" class="px-8 py-4 rounded-full glass-card text-white font-bold hover:bg-white/10 hover:-translate-y-1 transition-all border border-white/10">
+                        Let's Connect
                     </a>
                 </div>
-                <div class="social-preview">
-                    <!-- Social media links will be populated dynamically from API -->
+
+                <!-- Dynamic Social Icons -->
+                <div class="social-preview flex gap-4 justify-center lg:justify-start pt-6 text-gray-400">
+                    <!-- Loaded via JS -->
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="code-window">
-                    <div class="window-header">
-                        <div class="window-controls">
-                            <span class="control close"></span>
-                            <span class="control minimize"></span>
-                            <span class="control maximize"></span>
-                        </div>
-                        <div class="window-title">portfolio.js</div>
+
+            <!-- Visual (Redesigned Profile Picture - Mobile Optimized) -->
+            <div class="relative flex flex-col items-center lg:items-end justify-center mt-12 lg:mt-0 reveal animation-delay-500 order-1 lg:order-2">
+                
+                <!-- Background Decoration -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-primary/30 to-secondary/30 rounded-full blur-[80px] animate-pulse"></div>
+
+                <!-- Main Photo Container -->
+                <div class="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 group">
+                    
+                    <!-- Spinning Dashed Border -->
+                    <div class="absolute inset-0 rounded-full border-2 border-dashed border-white/20 animate-spin-slow"></div>
+                    
+                    <!-- Reverse Spinning Border -->
+                    <div class="absolute inset-4 rounded-full border border-dashed border-primary/30 animate-spin-slow" style="animation-direction: reverse;"></div>
+
+                    <!-- Glass Container for Image -->
+                    <div class="absolute inset-8 rounded-full glass-card overflow-hidden border-4 border-white/5 shadow-2xl transition-transform duration-500 group-hover:scale-105">
+                         <img id="developer-photo" 
+                         src="https://placehold.co/400x400/0a0a0a/667eea?text=Your+Photo" 
+                         alt="Vihanga Ashinshana" 
+                         class="w-full h-full object-cover rounded-full transition-all duration-700 filter grayscale hover:grayscale-0" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x400/0a0a0a/667eea?text=Photo+Error';"
+                        >
                     </div>
-                    <div class="code-content">
-                        <div class="code-line">
-                            <span class="line-number">1</span>
-                            <span class="code-text">
-                                <span class="keyword">const</span> 
-                                <span class="variable">developer</span> = {
-                            </span>
-                        </div>
-                        <div class="code-line">
-                            <span class="line-number">2</span>
-                            <span class="code-text">
-                                &nbsp;&nbsp;<span class="property">name</span>: 
-                                <span class="string">'Vihanga Ashinshana'</span>,
-                            </span>
-                        </div>
-                        <div class="code-line">
-                            <span class="line-number">3</span>
-                            <span class="code-text">
-                                &nbsp;&nbsp;<span class="property">age</span>: 
-                                <span class="number">0</span>,
-                            </span>
-                        </div>
-                        <div class="code-line">
-                            <span class="line-number">4</span>
-                            <span class="code-text">
-                                &nbsp;&nbsp;<span class="property">location</span>: 
-                                <span class="string">'Sri Lanka'</span>,
-                            </span>
-                        </div>
-                        <div class="code-line">
-                            <span class="line-number">5</span>
-                            <span class="code-text">
-                                &nbsp;&nbsp;<span class="property">skills</span>: [
-                                <span class="string">'JavaScript'</span>, 
-                                <span class="string">'Node.js'</span>]
-                            </span>
-                        </div>
-                        <div class="code-line">
-                            <span class="line-number">6</span>
-                            <span class="code-text">};</span>
-                        </div>
+
+                    <!-- Floating 'Open to Work' Badge -->
+                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:bottom-10 lg:-left-6 glass-card px-5 py-2.5 rounded-full flex items-center gap-3 animate-float border border-white/10 backdrop-blur-xl shadow-lg z-20 whitespace-nowrap">
+                        <span class="relative flex h-3 w-3">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                        </span>
+                        <span class="text-sm font-bold text-white tracking-wide">Open to Work</span>
                     </div>
+
+                    <!-- Decorative Floating Icon (Code) - Hidden on mobile -->
+                    <div class="hidden lg:block absolute top-10 -right-4 glass-card p-3 rounded-xl border border-white/10 shadow-lg animate-float animation-delay-2000 z-10">
+                        <i class="fas fa-code text-accent text-xl"></i>
+                    </div>
+
                 </div>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <div class="scroll-mouse">
-                <div class="scroll-wheel"></div>
-            </div>
-            <span class="scroll-text">Scroll to explore</span>
+
+        <!-- Scroll Down - Hidden on mobile -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-gray-500 hidden lg:block">
+            <i class="fas fa-chevron-down text-xl"></i>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Get to know me</span>
-                <h2 class="section-title">About Me</h2>
-                <div class="title-underline"></div>
+    <section id="about" class="py-24 relative bg-grid-pattern">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary text-sm font-bold tracking-wider uppercase bg-primary/10 px-4 py-1.5 rounded-full">Get to know me</span>
+                <h2 class="text-4xl md:text-5xl font-black mt-4 mb-4">About Me</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto"></div>
             </div>
-            <div class="about-grid">
-                <div class="about-content">
-                    <div class="about-card glass-card">
-                        <div class="card-glow"></div>
-                        <h3>Who I Am</h3>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Text Content -->
+                <div class="glass-card p-8 rounded-2xl reveal">
+                    <h3 class="text-2xl font-bold mb-4 text-white">Who I Am</h3>
+                    <div class="space-y-4 text-gray-400 leading-relaxed about-text-container">
                         <p>
                             I'm a full stack developer from Sri Lanka with an insatiable 
                             passion for technology and innovation. Currently balancing my studies 
@@ -170,60 +325,53 @@
                             constantly learning and building projects that challenge my skills and 
                             expand my knowledge in modern web technologies.
                         </p>
-                        <div class="achievement-badges">
-                            <div class="badge">
-                                <i class="fas fa-graduation-cap"></i>
-                                <span>Student</span>
-                            </div>
-                            <div class="badge">
-                                <i class="fas fa-code"></i>
-                                <span>Developer</span>
-                            </div>
-                            <div class="badge">
-                                <i class="fas fa-globe-asia"></i>
-                                <span>Sri Lanka</span>
-                            </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3 mt-8">
+                        <div class="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary flex items-center gap-2">
+                            <i class="fas fa-graduation-cap"></i> <span>Student</span>
+                        </div>
+                        <div class="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary flex items-center gap-2">
+                            <i class="fas fa-code"></i> <span>Developer</span>
+                        </div>
+                        <div class="px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary flex items-center gap-2">
+                            <i class="fas fa-globe-asia"></i> <span>Sri Lanka</span>
                         </div>
                     </div>
                 </div>
-                <div class="about-stats">
-                    <div class="stats-container">
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-birthday-cake"></i>
-                            </div>
-                            <div class="stat-info">
-                                <span class="stat-number" data-target="0">0</span>
-                                <span class="stat-label">Years Old</span>
-                            </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-2 gap-4 reveal">
+                    <div class="stat-card glass-card p-6 rounded-2xl text-center hover:-translate-y-2 transition-transform duration-300 group">
+                        <div class="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-xl text-white shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fas fa-birthday-cake"></i>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-code"></i>
-                            </div>
-                            <div class="stat-info">
-                                <span class="stat-number" data-target="0">0</span>
-                                <span class="stat-label">Years Coding</span>
-                            </div>
+                        <div class="text-3xl font-bold text-white mb-1 stat-number" data-target="0" data-label="Years Old">0</div>
+                        <div class="text-sm text-gray-500 font-medium">Years Old</div>
+                    </div>
+                    
+                    <div class="stat-card glass-card p-6 rounded-2xl text-center hover:-translate-y-2 transition-transform duration-300 group">
+                        <div class="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-xl text-white shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fas fa-code"></i>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-project-diagram"></i>
-                            </div>
-                            <div class="stat-info">
-                                <span class="stat-number" data-target="50">0</span>
-                                <span class="stat-label">Projects Built</span>
-                            </div>
+                        <div class="text-3xl font-bold text-white mb-1 stat-number" data-target="0" data-label="Years Coding">0</div>
+                        <div class="text-sm text-gray-500 font-medium">Years Coding</div>
+                    </div>
+
+                    <div class="stat-card glass-card p-6 rounded-2xl text-center hover:-translate-y-2 transition-transform duration-300 group">
+                        <div class="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-xl text-white shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fas fa-project-diagram"></i>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-coffee"></i>
-                            </div>
-                            <div class="stat-info">
-                                <span class="stat-number" data-target="1000">0</span>
-                                <span class="stat-label">Cups of Coffee</span>
-                            </div>
+                        <div class="text-3xl font-bold text-white mb-1 stat-number" data-target="50">0</div>
+                        <div class="text-sm text-gray-500 font-medium">Projects Built</div>
+                    </div>
+
+                    <div class="stat-card glass-card p-6 rounded-2xl text-center hover:-translate-y-2 transition-transform duration-300 group">
+                        <div class="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-xl text-white shadow-lg group-hover:scale-110 transition-transform">
+                            <i class="fas fa-coffee"></i>
                         </div>
+                        <div class="text-3xl font-bold text-white mb-1 stat-number" data-target="1000">0</div>
+                        <div class="text-sm text-gray-500 font-medium">Cups of Coffee</div>
                     </div>
                 </div>
             </div>
@@ -231,153 +379,644 @@
     </section>
 
     <!-- Skills Section -->
-    <section class="skills" id="skills">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">What I do</span>
-                <h2 class="section-title">My Skills</h2>
-                <div class="title-underline"></div>
+    <section id="skills" class="py-24 relative overflow-hidden">
+        <!-- Background Glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 blur-3xl pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary text-sm font-bold tracking-wider uppercase bg-primary/10 px-4 py-1.5 rounded-full">What I do</span>
+                <h2 class="text-4xl md:text-5xl font-black mt-4 mb-4">My Skills</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto"></div>
             </div>
-            <div class="skills-grid">
-                <div class="skill-card glass-card">
-                    <div class="skill-icon javascript">
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- JS -->
+                <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 group reveal">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-[#f7df1e] to-[#f0db4f] flex items-center justify-center text-3xl text-black mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-lg shadow-yellow-500/20">
                         <i class="fab fa-js-square"></i>
                     </div>
-                    <h3>JavaScript</h3>
-                    <p>Modern ES6+ JavaScript for dynamic and interactive web applications with advanced features</p>
-                    <div class="skill-progress">
-                        <div class="progress-bar" data-progress="90">
-                            <div class="progress-fill"></div>
-                        </div>
-                        <span class="progress-text">90%</span>
+                    <h3 class="text-xl font-bold mb-2">JavaScript</h3>
+                    <p class="text-gray-400 text-sm mb-6 h-16">Modern ES6+ JavaScript for dynamic and interactive web applications.</p>
+                    <div class="relative h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-secondary w-0 transition-all duration-1000 delay-300 progress-bar" data-width="90%"></div>
                     </div>
+                    <div class="text-right text-xs text-primary font-bold mt-1">90%</div>
                 </div>
-                <div class="skill-card glass-card">
-                    <div class="skill-icon nodejs">
+
+                <!-- Node -->
+                <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 group reveal delay-100">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-[#68a063] to-[#8cc84b] flex items-center justify-center text-3xl text-white mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-lg shadow-green-500/20">
                         <i class="fab fa-node-js"></i>
                     </div>
-                    <h3>Node.js</h3>
-                    <p>Server-side development with Express.js, API creation, and backend architecture</p>
-                    <div class="skill-progress">
-                        <div class="progress-bar" data-progress="85">
-                            <div class="progress-fill"></div>
-                        </div>
-                        <span class="progress-text">85%</span>
+                    <h3 class="text-xl font-bold mb-2">Node.js</h3>
+                    <p class="text-gray-400 text-sm mb-6 h-16">Server-side development with Express.js and API creation.</p>
+                    <div class="relative h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-secondary w-0 transition-all duration-1000 delay-300 progress-bar" data-width="85%"></div>
                     </div>
+                    <div class="text-right text-xs text-primary font-bold mt-1">85%</div>
                 </div>
-                <div class="skill-card glass-card">
-                    <div class="skill-icon html">
+
+                <!-- Express.js -->
+                <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 group reveal delay-200">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-gray-600 to-gray-900 flex items-center justify-center text-3xl text-white mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-lg shadow-gray-500/20">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Express.js</h3>
+                    <p class="text-gray-400 text-sm mb-6 h-16">Fast, unopinionated, minimalist web framework for Node.js.</p>
+                    <div class="relative h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-secondary w-0 transition-all duration-1000 delay-300 progress-bar" data-width="88%"></div>
+                    </div>
+                    <div class="text-right text-xs text-primary font-bold mt-1">88%</div>
+                </div>
+
+                <!-- Tailwind CSS -->
+                <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 group reveal delay-300">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-3xl text-white mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-lg shadow-cyan-500/20">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Tailwind CSS</h3>
+                    <p class="text-gray-400 text-sm mb-6 h-16">A utility-first CSS framework for rapid UI development.</p>
+                    <div class="relative h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-secondary w-0 transition-all duration-1000 delay-300 progress-bar" data-width="92%"></div>
+                    </div>
+                    <div class="text-right text-xs text-primary font-bold mt-1">92%</div>
+                </div>
+
+                <!-- HTML -->
+                <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 group reveal delay-100">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-[#e34c26] to-[#f06529] flex items-center justify-center text-3xl text-white mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-lg shadow-orange-500/20">
                         <i class="fab fa-html5"></i>
                     </div>
-                    <h3>HTML5</h3>
-                    <p>Semantic markup, accessibility, and modern HTML5 features for robust web structure</p>
-                    <div class="skill-progress">
-                        <div class="progress-bar" data-progress="95">
-                            <div class="progress-fill"></div>
-                        </div>
-                        <span class="progress-text">95%</span>
+                    <h3 class="text-xl font-bold mb-2">HTML5</h3>
+                    <p class="text-gray-400 text-sm mb-6 h-16">Semantic markup, accessibility, and modern web structure.</p>
+                    <div class="relative h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-secondary w-0 transition-all duration-1000 delay-300 progress-bar" data-width="95%"></div>
                     </div>
+                    <div class="text-right text-xs text-primary font-bold mt-1">95%</div>
                 </div>
-                <div class="skill-card glass-card">
-                    <div class="skill-icon css">
+
+                <!-- CSS -->
+                <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 group reveal delay-200">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-[#1572b6] to-[#33a9dc] flex items-center justify-center text-3xl text-white mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-lg shadow-blue-500/20">
                         <i class="fab fa-css3-alt"></i>
                     </div>
-                    <h3>CSS3</h3>
-                    <p>Advanced styling, animations, flexbox, grid, and responsive design principles</p>
-                    <div class="skill-progress">
-                        <div class="progress-bar" data-progress="88">
-                            <div class="progress-fill"></div>
-                        </div>
-                        <span class="progress-text">88%</span>
+                    <h3 class="text-xl font-bold mb-2">CSS3</h3>
+                    <p class="text-gray-400 text-sm mb-6 h-16">Advanced styling, animations, flexbox, and grid layouts.</p>
+                    <div class="relative h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-secondary w-0 transition-all duration-1000 delay-300 progress-bar" data-width="88%"></div>
                     </div>
+                    <div class="text-right text-xs text-primary font-bold mt-1">88%</div>
                 </div>
+
+                <!-- Axios -->
+                <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 group reveal delay-300">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-3xl text-white mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-lg shadow-purple-500/20">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Axios</h3>
+                    <p class="text-gray-400 text-sm mb-6 h-16">Promise-based HTTP client for efficient data fetching.</p>
+                    <div class="relative h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-secondary w-0 transition-all duration-1000 delay-300 progress-bar" data-width="95%"></div>
+                    </div>
+                    <div class="text-right text-xs text-primary font-bold mt-1">95%</div>
+                </div>
+
+                <!-- Cheerio -->
+                <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 group reveal delay-400">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-3xl text-white mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-lg shadow-orange-500/20">
+                        <i class="fas fa-magnifying-glass"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Cheerio</h3>
+                    <p class="text-gray-400 text-sm mb-6 h-16">Fast, flexible, and lean implementation of core jQuery for server-side scraping.</p>
+                    <div class="relative h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-secondary w-0 transition-all duration-1000 delay-300 progress-bar" data-width="90%"></div>
+                    </div>
+                    <div class="text-right text-xs text-primary font-bold mt-1">90%</div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Let's connect</span>
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="title-underline"></div>
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative bg-grid-pattern">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary text-sm font-bold tracking-wider uppercase bg-primary/10 px-4 py-1.5 rounded-full">Portfolio</span>
+                <h2 class="text-4xl md:text-5xl font-black mt-4 mb-4">Recent Projects</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto"></div>
             </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-card glass-card">
-                        <div class="card-glow"></div>
-                        <h3>Let's Work Together</h3>
-                        <p>I'm always excited about new opportunities and interesting projects. Whether you have a question, want to collaborate, or just want to say hi, feel free to reach out!</p>
-                        <div class="contact-details">
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="contact-text">
-                                    <span class="contact-label">Location</span>
-                                    <span class="contact-value">Sri Lanka</span>
-                                </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 group reveal">
+                    <!-- Placeholder Image -->
+                    <div class="relative h-48 overflow-hidden bg-gray-900">
+                        <img src="https://github.com/vihanga-yt/AboutMe-Api/blob/main/tikpull.png?raw=true" alt="Project 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1a1a1a/667eea?text=Project+1';" >
+                        <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white border border-white/10">
+                            Website
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">TikTok Downloader</h3>
+                        <p class="text-gray-400 text-sm mb-6 line-clamp-2">Liquid Glass Themed - Tailwind Css + Html,Js and css Full source Code. Front-End only.</p>
+                        
+                        <div class="flex gap-4">
+                            <a href="https://tik-pull.vercel.app/" class="flex-1 py-2.5 rounded-full bg-gradient-to-r from-primary to-secondary text-center text-white font-medium text-sm hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center justify-center gap-2">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                            <a href="https://buymeacoffee.com/vihangayt0/e/481949" class="flex-1 py-2.5 rounded-full border border-green-500/30 hover:bg-green-500/10 text-center text-green-400 font-medium text-sm transition-all flex items-center justify-center gap-2">
+                                <i class="fas fa-shopping-cart"></i> Buy Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Contact Section (Modern & Redesigned) -->
+    <section id="contact" class="py-24 relative bg-grid-pattern overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute top-1/4 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 -right-20 w-64 h-64 bg-secondary/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary text-sm font-bold tracking-wider uppercase bg-primary/10 px-4 py-1.5 rounded-full">Let's connect</span>
+                <h2 class="text-4xl md:text-5xl font-black mt-4 mb-4">Get In Touch</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-stretch">
+                
+                <!-- Contact Info & Status -->
+                <div class="flex flex-col gap-6 reveal">
+                    <!-- Main CTA Card -->
+                    <div class="glass-card p-8 rounded-3xl border border-white/10 relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
+                            <i class="fas fa-paper-plane text-9xl text-white transform rotate-12"></i>
+                        </div>
+                        
+                        <h3 class="text-3xl font-bold text-white mb-4 relative z-10">Let's Work Together</h3>
+                        <p class="text-gray-400 mb-8 relative z-10 text-lg leading-relaxed">
+                            I'm currently available for freelance projects and open to new opportunities. 
+                            Have a project in mind or just want to say hi? My inbox is always open!
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 relative z-10">
+                            <!-- Updated: WhatsApp Button -->
+                            <a href="#" id="whatsapp-cta" target="_blank" class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold shadow-lg shadow-green-500/25 hover:shadow-green-500/40 hover:-translate-y-1 transition-all duration-300 group/btn">
+                                <i class="fab fa-whatsapp text-2xl group-hover/btn:scale-110 transition-transform"></i>
+                                <span>Chat on WhatsApp</span>
+                            </a>
+                            
+                            <div class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl glass-card border border-white/5 text-gray-300">
+                                <span class="relative flex h-3 w-3">
+                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                  <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                                </span>
+                                <span class="font-medium">Available for new projects</span>
                             </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div class="contact-text">
-                                    <span class="contact-label">Age</span>
-                                    <span class="contact-value">Years Old</span>
-                                </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Info Grid -->
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="glass-card p-6 rounded-2xl border border-white/5 flex items-center gap-4 hover:bg-white/5 transition-colors duration-300">
+                            <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
                             </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-graduation-cap"></i>
-                                </div>
-                                <div class="contact-text">
-                                    <span class="contact-label">Status</span>
-                                    <span class="contact-value">Student & Developer</span>
-                                </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase font-bold tracking-wider">Location</p>
+                                <p class="text-white font-medium">Sri Lanka</p>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-card p-6 rounded-2xl border border-white/5 flex items-center gap-4 hover:bg-white/5 transition-colors duration-300">
+                            <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400">
+                                <i class="fas fa-clock text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase font-bold tracking-wider">Time Zone</p>
+                                <p class="text-white font-medium">GMT +5:30</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="social-section">
-                    <div class="social-grid">
-                        <!-- Social media cards will be populated dynamically from API -->
+
+                <!-- Social Connect Grid -->
+                <div class="glass-card p-1 rounded-3xl border border-white/10 reveal delay-100 h-full">
+                    <div class="bg-dark/50 backdrop-blur-md rounded-[20px] p-8 h-full flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                            <i class="fas fa-share-nodes text-primary"></i>
+                            Connect on Socials
+                        </h3>
+                        
+                        <!-- This container will be populated by JS -->
+                        <div class="social-grid grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
+                            <!-- JS Populated Items -->
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-left">
-                    <div class="footer-logo">
-                        <span class="logo-text">VihangaYT</span>
-                        <div class="logo-pulse"></div>
+    <footer class="bg-dark/95 backdrop-blur-xl border-t border-white/5 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12 border-b border-white/5 pb-12">
+                <div class="text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-2 mb-2">
+                        <span class="text-2xl font-black text-gradient">VihangaYT</span>
+                        <div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
                     </div>
-                    <p>Building the future, one line of code at a time.</p>
+                    <p class="text-gray-500 text-sm">Building the future, one line of code at a time.</p>
                 </div>
-                <div class="footer-right">
-                    <div class="footer-links">
-                        <a href="#home">Home</a>
-                        <a href="#about">About</a>
-                        <a href="#skills">Skills</a>
-                        <a href="#contact">Contact</a>
-                    </div>
+                <div class="flex gap-8 text-sm font-medium text-gray-400">
+                    <a href="#home" class="hover:text-primary transition-colors">Home</a>
+                    <a href="#about" class="hover:text-primary transition-colors">About</a>
+                    <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
+                    <a href="#projects" class="hover:text-primary transition-colors">Projects</a>
+                    <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; <span id="current-year">2024</span> Vihanga Ashinshana. All rights reserved.</p>
-                <div class="footer-social">
-                    <!-- Social media links will be populated dynamically from API -->
+
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-gray-600 text-sm text-center md:text-left">
+                    &copy; <span id="current-year">2024</span> Vihanga Ashinshana. All rights reserved.
+                </p>
+                <div class="footer-social flex gap-4">
+                    <!-- Populated by JS -->
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- JavaScript logic -->
+    <script>
+        // --- Core Application Logic ---
+
+        // Social Media Configuration (Added 'theme' for background color application)
+        const socialConfig = {
+            instagram: { icon: 'fab fa-instagram', name: 'Instagram', description: 'Follow my journey', color: 'hover:text-pink-500', theme: 'pink-500' },
+            telegram: { icon: 'fab fa-telegram', name: 'Telegram', description: 'Direct messages', color: 'hover:text-blue-400', theme: 'blue-400' },
+            whatsapp: { icon: 'fab fa-whatsapp', name: 'WhatsApp', description: 'My updates', color: 'hover:text-green-500', theme: 'green-500' },
+            facebook: { icon: 'fab fa-facebook-f', name: 'Facebook', description: 'Connect with me', color: 'hover:text-blue-600', theme: 'blue-600' },
+            github: { icon: 'fab fa-github', name: 'GitHub', description: 'View my code', color: 'hover:text-gray-100', theme: 'gray-700' }, // Use darker gray for theme visibility
+            coffee: { icon: 'fas fa-mug-hot', name: 'Buy Me a Coffee', description: 'Support my work', color: 'hover:text-yellow-500', theme: 'yellow-500' }
+        };
+
+        // 1. Data Calculation (Age & Years Coding)
+        function calculateStats() {
+            const currentYear = new Date().getFullYear();
+            const birthYear = 2009;
+            const codingStartYear = 2021;
+            
+            return {
+                age: currentYear - birthYear,
+                codingYears: currentYear - codingStartYear,
+                currentYear: currentYear
+            };
+        }
+
+        // 2. Update DOM with Calculated Data
+        function updateDynamicContent() {
+            const stats = calculateStats();
+            
+            // Footer Year
+            const yearEl = document.getElementById('current-year');
+            if (yearEl) yearEl.textContent = stats.currentYear;
+
+            // Hero Description
+            const heroDesc = document.querySelector('.hero-description');
+            if (heroDesc) {
+                heroDesc.innerHTML = `${stats.age}-year-old passionate developer from Sri Lanka, crafting innovative digital experiences with JavaScript, Node.js, and modern web technologies.`;
+            }
+
+            // About Text
+            const aboutTexts = document.querySelectorAll('.about-text-container p');
+            if (aboutTexts.length >= 2) {
+                aboutTexts[0].textContent = `I'm a ${stats.age}-year-old full stack developer from Sri Lanka with an insatiable passion for technology and innovation. Currently balancing my studies while diving deep into the world of web development, creating solutions that make a difference.`;
+                aboutTexts[1].textContent = `My journey in programming started ${stats.codingYears} years ago, and since then I've been constantly learning and building projects that challenge my skills.`;
+            }
+
+            // Contact Section Age
+            const contactAge = document.querySelector('.contact-age');
+            if (contactAge) contactAge.textContent = `${stats.age} Years Old`;
+
+            // Stat Cards (Data Attributes)
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(el => {
+                const label = el.dataset.label;
+                if (label === 'Years Old') el.dataset.target = stats.age;
+                if (label === 'Years Coding') el.dataset.target = stats.codingYears;
+            });
+        }
+        
+        // 3. Update Developer Photo in DOM and Head
+        function updateDeveloperPhoto(photoUrl) {
+            const heroPhoto = document.getElementById('developer-photo');
+            if (heroPhoto) {
+                heroPhoto.src = photoUrl;
+                heroPhoto.alt = "Vihanga Ashinshana - Developer Photo";
+            }
+            
+            // Update head elements for SEO/Sharing/Favicon
+            const favicon = document.getElementById('favicon');
+            if (favicon) {
+                favicon.href = photoUrl;
+            }
+
+            const ogImage = document.getElementById('og-image');
+            if (ogImage) {
+                ogImage.content = photoUrl;
+            }
+        }
+
+        // 4. Social Media Fetcher
+        async function fetchSocialLinks() {
+            try {
+                // Use exponential backoff for resilience
+                let response;
+                const maxRetries = 3;
+                let delay = 1000;
+
+                for (let i = 0; i < maxRetries; i++) {
+                    try {
+                        response = await fetch('https://raw.githubusercontent.com/vihanga-yt/AboutMe-Api/refs/heads/main/about.json');
+                        if (response.ok) break;
+                    } catch (e) {
+                        if (i < maxRetries - 1) {
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                            delay *= 2;
+                        } else {
+                            throw e;
+                        }
+                    }
+                }
+
+                if (!response || !response.ok) throw new Error('Network response was not ok');
+
+                const data = await response.json();
+                
+                if (data.social_links) {
+                    renderSocials(data.social_links, socialConfig);
+                    // Crucial: Update photo URL in the DOM
+                    if (data.social_links.me) {
+                        updateDeveloperPhoto(data.social_links.me);
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to load socials or profile data:", error);
+            }
+        }
+
+        function renderSocials(links, config) {
+            // Hero Preview
+            const heroContainer = document.querySelector('.social-preview');
+            // Contact Grid
+            const gridContainer = document.querySelector('.social-grid');
+            // Footer
+            const footerContainer = document.querySelector('.footer-social');
+            
+            // Update Main WhatsApp CTA if exists
+            if (links.whatsapp) {
+                const whatsappBtn = document.getElementById('whatsapp-cta');
+                if (whatsappBtn) whatsappBtn.href = links.whatsapp;
+            }
+
+            if(heroContainer) heroContainer.innerHTML = '';
+            if(gridContainer) gridContainer.innerHTML = '';
+            if(footerContainer) footerContainer.innerHTML = '';
+
+            Object.entries(links).forEach(([platform, url]) => {
+                if (!url || url === '#' || !config[platform]) return;
+                
+                const conf = config[platform];
+                const theme = conf.theme || 'primary'; // Default fallback
+
+                // Hero Icon
+                const heroLink = document.createElement('a');
+                heroLink.href = url;
+                heroLink.target = '_blank';
+                heroLink.rel = 'noopener noreferrer';
+                heroLink.className = `w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 hover:scale-110 transition-all ${conf.color}`;
+                heroLink.innerHTML = `<i class="${conf.icon}"></i>`;
+                heroContainer?.appendChild(heroLink);
+
+                // Contact Grid Card (NEW MODERN DESIGN)
+                // Updated: Uses specific 'theme' color for hover states instead of generic primary
+                const card = document.createElement('a');
+                card.href = url;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = `group p-4 rounded-xl bg-white/5 border border-white/5 hover:border-${theme}/30 hover:bg-${theme}/5 transition-all duration-300 flex items-center gap-4`;
+                
+                card.innerHTML = `
+                    <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-xl text-white group-hover:scale-110 group-hover:bg-${theme} group-hover:text-white transition-all duration-300">
+                        <i class="${conf.icon}"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-white font-bold text-sm group-hover:text-${theme} transition-colors truncate">${conf.name}</h4>
+                        <p class="text-xs text-gray-500 group-hover:text-gray-400 truncate">${conf.description}</p>
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-600 group-hover:text-${theme} group-hover:translate-x-1 transition-all"></i>
+                `;
+                gridContainer?.appendChild(card);
+
+                // Footer Icon
+                const footerLink = document.createElement('a');
+                footerLink.href = url;
+                footerLink.target = '_blank';
+                footerLink.rel = 'noopener noreferrer';
+                footerLink.className = `w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-primary/20 hover:text-white transition-all`;
+                footerLink.innerHTML = `<i class="${conf.icon}"></i>`;
+                footerContainer?.appendChild(footerLink);
+            });
+        }
+
+        // --- UI Interactions ---
+
+        // Custom Cursor
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+
+        window.addEventListener('mousemove', function(e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Dot follows instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Outline follows with slight delay (animation handled by CSS transition)
+            cursorOutline.style.left = `${posX}px`;
+            cursorOutline.style.top = `${posY}px`;
+            
+            // Interaction logic needed here to handle transform
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursorOutline.style.backgroundColor = 'rgba(102, 126, 234, 0.1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorOutline.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // Navigation
+        const navbar = document.getElementById('navbar');
+        const navToggle = document.getElementById('nav-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-0');
+            } else {
+                navbar.classList.remove('py-0');
+            }
+            
+            // Active link highlight
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('text-white');
+                link.classList.add('text-gray-300');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('text-white');
+                    link.classList.remove('text-gray-300');
+                }
+            });
+        });
+
+        navToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('translate-x-full');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+
+        // Typing Effect
+        const typeTarget = document.querySelector('.typing-text');
+        const typeText = "Full Stack Developer";
+        let typeIndex = 0;
+
+        function typeWriter() {
+            if (typeIndex < typeText.length) {
+                typeTarget.textContent += typeText.charAt(typeIndex);
+                typeIndex++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        // Particle Trail (Simplified for performance)
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'fixed w-1 h-1 bg-primary rounded-full pointer-events-none z-50';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            document.body.appendChild(particle);
+
+            const animation = particle.animate([
+                { transform: 'translate(0, 0) scale(1)', opacity: 0.8 },
+                { transform: `translate(${Math.random() * 60 - 30}px, ${Math.random() * 60 - 30}px) scale(0)`, opacity: 0 }
+            ], {
+                duration: 800,
+                easing: 'cubic-bezier(0,0,0.2,1)'
+            });
+
+            animation.onfinish = () => particle.remove();
+        }
+
+        let throttleParticle = false;
+        window.addEventListener('mousemove', (e) => {
+            if (!throttleParticle) {
+                createParticle(e.clientX, e.clientY);
+                throttleParticle = true;
+                setTimeout(() => throttleParticle = false, 50);
+            }
+        });
+
+        // Intersection Observer for Animations and Counters
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Trigger Progress Bars
+                    const bars = entry.target.querySelectorAll('.progress-bar');
+                    bars.forEach(bar => {
+                        bar.style.width = bar.dataset.width;
+                    });
+
+                    // Trigger Counters
+                    const counters = entry.target.querySelectorAll('.stat-number');
+                    counters.forEach(counter => {
+                        const target = +counter.dataset.target;
+                        const duration = 2000; // ms
+                        const increment = target / (duration / 16); 
+                        
+                        let current = 0;
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current < target) {
+                                counter.textContent = Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.textContent = target;
+                            }
+                        };
+                        updateCounter();
+                        // Remove class so it doesn't re-animate constantly if scrolling up/down rapidly
+                        counter.classList.remove('stat-number');
+                    });
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            updateDynamicContent();
+            fetchSocialLinks();
+            setTimeout(() => {
+                typeTarget.textContent = '';
+                typeWriter();
+            }, 1000);
+        });
+
+    </script>
 </body>
 </html>
